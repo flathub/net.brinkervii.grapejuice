@@ -7,9 +7,8 @@ separate-locales: false
 
 finish-args:
         - --share=network
-        - --socket=fallback-x11
+        - --socket=x11
         - --share=ipc
-        - --socket=wayland
         - --device=dri
         - --allow=devel
         - --socket=pulseaudio
