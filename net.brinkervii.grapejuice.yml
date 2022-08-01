@@ -11,10 +11,10 @@ finish-args:
         - --share=ipc
         - --socket=wayland
         - --device=dri
-        - --allow=devel
+        - --allow=devel # Necessary for VMProtect to function.
         - --socket=pulseaudio
         - --allow=multiarch
-
+        - --device=all # Necessary for controller support (including on SteamDeck)
 add-extensions:
         org.freedesktop.Platform.Compat.i386:
                 directory: lib/i386-linux-gnu
