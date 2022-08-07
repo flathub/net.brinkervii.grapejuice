@@ -39,6 +39,7 @@ add-extensions:
                 download-if: active-gl-driver
                 enable-if: active-gl-driver
 modules:
+  - xrandr.yml
   - python3-requirements.yml
   - name: bundle-setup
     buildsystem: simple
