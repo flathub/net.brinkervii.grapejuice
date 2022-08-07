@@ -46,6 +46,9 @@ modules:
       - $(pwd)/configure
       - make $(pwd)/
       - make install DESTDIR=/app/bin
+      - cp /app/bin/usr/local/bin/xkeystone /app/
+      - cp /app/bin/usr/local/bin/xrandr /app/
+      - rm -r /app/bin/usr
     sources:
       - type: archive
         url: https://www.x.org/archive/individual/app/xrandr-1.5.1.tar.gz
