@@ -43,8 +43,8 @@ modules:
   - name: xrandr
     buildsystem: simple
     build-commands:
-      - $(pwd)/xrandr-1.5.1/configure
-      - make $(pwd)/xrandr-1.5.1/
+      - $(pwd)/configure
+      - make $(pwd)/
       - make install DESTDIR=/app/bin
     sources:
       - type: archive
