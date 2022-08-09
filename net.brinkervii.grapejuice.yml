@@ -122,6 +122,8 @@ modules:
         tag: v5.3.2
         commit: 49292ba49ae57f904aad803cd3368ca94541c64a
       - type: patch
+        path: logpathhack.patch
+      - type: patch
         path: patchbinaries.patch
       - type: file
         path: user_settings.json
