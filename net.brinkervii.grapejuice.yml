@@ -119,8 +119,8 @@ modules:
         sha512: b60dd9628a592bef596049ff144ccdb7c2518afdbc70e32464f0d519122de4b2870ad8b7049f91acb876d302cde9189e899d54b615136d3bae1c0cc1bc2810da
       - type: git
         url: https://gitlab.com/brinkervii/grapejuice.git
-        tag: v5.3.4
-        commit: 0ec9c350a69c544c197b0ce495447b23f60a2a7b
+        tag: v5.5.4
+        commit: d17c066025a3e4b878c56a6ee2623894d4e7d774
       - type: patch
         path: logpathhack.patch
       - type: patch
