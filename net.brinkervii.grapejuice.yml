@@ -1,6 +1,6 @@
-app-id: net.brinkervii.grapejuice 
+app-id: net.brinkervii.grapejuice
 runtime: org.freedesktop.Platform
-runtime-version: '21.08'
+runtime-version: '22.08'
 sdk: org.freedesktop.Sdk
 command: grapejuice
 separate-locales: false
@@ -14,28 +14,20 @@ finish-args:
         - --allow=devel # Necessary for VMProtect to function.
         - --socket=pulseaudio
         - --allow=multiarch
-        - --device=all # Necessary for controller support (including on SteamDeck)
+        - --device=all # Necessary for controller support (important on Steam Deck)
 add-extensions:
         org.freedesktop.Platform.Compat.i386:
                 directory: lib/i386-linux-gnu
-                version: '21.08'
+                version: '22.08'
         org.freedesktop.Platform.GL32:
                 directory: lib/i386-linux-gnu/GL
                 version: '1.4'
-                versions: 21.08;1.4
+                versions: 22.08;1.4
                 subdirectories: true
                 no-autodownload: true
                 autodelete: false
                 add-ld-path: lib
                 merge-dirs: vulkan/icd.d;glvnd/egl_vendor.d;OpenCL/vendors;lib/dri;lib/d3d;vulkan/explicit_layer.d;vulkan/implicit_layer.d
-                download-if: active-gl-driver
-                enable-if: active-gl-driver
-        org.freedesktop.Platform.VAAPI.Intel.i386:
-                directory: lib/i386-linux-gnu/dri/intel-vaapi-driver
-                version: '21.08'
-                subdirectories: true
-                autodelete: false
-                add-ld-path: lib
                 download-if: active-gl-driver
                 enable-if: active-gl-driver
 modules:
@@ -73,14 +65,9 @@ modules:
       # use grapejuice packaging module
       - PYTHONPATH=$(pwd)/src python3 -m grapejuice_packaging linux_package
       - cp -r build/linux_package/usr/* /app
-      - mkdir -p /app/lib/python3.9
-      - mkdir -p /app/lib/python3.9/pip_deps
+      - mkdir -p /app/lib/python3.10/pip_deps
       - mkdir /app/locales
-      - pip3 install $(pwd) --target=/app/lib/python3.9/pip_deps --no-deps --no-index
-      # hack: overwrite grapejuice bins
-      #- install -Dm755 modified_bins/grapejuice /app/bin
-      #- install -Dm755 modified_bins/grapejuice-gui /app/bin
-      #- install -Dm755 modified_bins/grapejuiced /app/bin
+      - pip3 install $(pwd) --target=/app/lib/python3.10/pip_deps --no-deps --no-index
       # install wine
       - tar --use-compress-program=unzstd -xvf debuntu-wine-tkg-staging-fsync-git-7.1.r2.gc437a01e.tar.zst
       - mv wine-tkg-staging-fsync-git-7.1.r2.gc437a01e /app/patched_wine
@@ -91,28 +78,28 @@ modules:
       - install -Dm644 src/grapejuice_common/assets/desktop/roblox-player.desktop /app/share/applications/net.brinkervii.grapejuice.robloxplayer.desktop
       - install -Dm644 src/grapejuice_common/assets/desktop/roblox-studio.desktop /app/share/applications/net.brinkervii.grapejuice.robloxstudio.desktop
       # edit grapejuice.desktop
-      - desktop-file-edit /app/share/applications/net.brinkervii.grapejuice.desktop --set-icon="net.brinkervii.grapejuice" --set-key="Exec" --set-value="grapejuice gui" 
+      - desktop-file-edit /app/share/applications/net.brinkervii.grapejuice.desktop --set-icon="net.brinkervii.grapejuice" --set-key="Exec" --set-value="grapejuice gui"
       # edit robloxapp.desktop
       - desktop-file-edit /app/share/applications/net.brinkervii.grapejuice.robloxapp.desktop --set-icon="net.brinkervii.grapejuice.robloxapp" --set-key="Exec" --set-value="grapejuice app"
       # edit robloxplayer.desktop
       - desktop-file-edit /app/share/applications/net.brinkervii.grapejuice.robloxplayer.desktop --set-icon="net.brinkervii.grapejuice.robloxplayer" --set-key="Exec" --set-value="grapejuice player %u"
       # edit robloxstudio.desktop
-      - desktop-file-edit /app/share/applications/net.brinkervii.grapejuice.robloxstudio.desktop --set-icon="net.brinkervii.grapejuice.robloxstudio" --set-key="Exec" --set-value="grapejuice studio %u" 
+      - desktop-file-edit /app/share/applications/net.brinkervii.grapejuice.robloxstudio.desktop --set-icon="net.brinkervii.grapejuice.robloxstudio" --set-key="Exec" --set-value="grapejuice studio %u"
       # install grapejuice icons
       # 64x64 icons
       - install -Dm644 src/grapejuice_common/assets/icons/hicolor/64x64/apps/grapejuice-roblox-player.png /app/share/icons/hicolor/64x64/apps/net.brinkervii.grapejuice.robloxplayer.png
-      - install -Dm644 src/grapejuice_common/assets/icons/hicolor/64x64/apps/grapejuice-roblox-studio.png /app/share/icons/hicolor/64x64/apps/net.brinkervii.grapejuice.robloxstudio.png 
+      - install -Dm644 src/grapejuice_common/assets/icons/hicolor/64x64/apps/grapejuice-roblox-studio.png /app/share/icons/hicolor/64x64/apps/net.brinkervii.grapejuice.robloxstudio.png
       - install -Dm644 src/grapejuice_common/assets/icons/hicolor/64x64/apps/grapejuice-roblox-player.png /app/share/icons/hicolor/64x64/apps/net.brinkervii.grapejuice.robloxapp.png
       - install -Dm644 src/grapejuice_common/assets/icons/hicolor/64x64/apps/grapejuice.png /app/share/icons/hicolor/64x64/apps/net.brinkervii.grapejuice.png
-      # 128x128 icons     
+      # 128x128 icons
       - install -Dm644 src/grapejuice_common/assets/icons/hicolor/128x128/apps/grapejuice-roblox-player.png /app/share/icons/hicolor/128x128/apps/net.brinkervii.grapejuice.robloxplayer.png
-      - install -Dm644 src/grapejuice_common/assets/icons/hicolor/128x128/apps/grapejuice-roblox-studio.png /app/share/icons/hicolor/128x128/apps/net.brinkervii.grapejuice.robloxstudio.png 
+      - install -Dm644 src/grapejuice_common/assets/icons/hicolor/128x128/apps/grapejuice-roblox-studio.png /app/share/icons/hicolor/128x128/apps/net.brinkervii.grapejuice.robloxstudio.png
       - install -Dm644 src/grapejuice_common/assets/icons/hicolor/128x128/apps/grapejuice-roblox-player.png /app/share/icons/hicolor/128x128/apps/net.brinkervii.grapejuice.robloxapp.png
       - install -Dm644 src/grapejuice_common/assets/icons/hicolor/128x128/apps/grapejuice.png /app/share/icons/hicolor/128x128/apps/net.brinkervii.grapejuice.png
-      # scalable icons      
+      # scalable icons
       - install -Dm644 src/grapejuice_common/assets/icons/hicolor/scalable/apps/grapejuice.svg /app/share/icons/hicolor/scalable/apps/net.brinkervii.grapejuice.svg
       # install metainfo
-      - install -Dm644 net.brinkervii.grapejuice.metainfo.xml -t /app/share/metainfo 
+      - install -Dm644 net.brinkervii.grapejuice.metainfo.xml -t /app/share/metainfo
     sources:
       - type: file
         url: https://gitlab.com/brinkervii/wine-builds/-/raw/main/debuntu-wine-tkg-staging-fsync-git-7.1.r2.gc437a01e.tar.zst?inline=false
