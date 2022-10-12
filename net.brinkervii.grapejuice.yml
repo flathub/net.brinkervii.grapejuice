@@ -10,7 +10,6 @@ finish-args:
         - --socket=x11
         - --share=ipc
         - --socket=wayland
-        - --device=dri
         - --allow=devel # Necessary for VMProtect to function.
         - --socket=pulseaudio
         - --allow=multiarch
@@ -32,6 +31,7 @@ add-extensions:
                 enable-if: active-gl-driver
 modules:
   - python3-requirements.yml
+
   - name: xrandr
     buildsystem: simple
     build-commands:
@@ -45,18 +45,17 @@ modules:
       - type: archive
         url: https://www.x.org/archive/individual/app/xrandr-1.5.1.tar.gz
         sha256: 7b99edb7970a1365eaf5bcaf552144e4dfc3ccf510c4abc08569849929fb366e
+
   - name: bundle-setup
     buildsystem: simple
     build-commands:
       - mkdir -p /app/lib32
       - mkdir -p /app/lib/i386-linux-gnu
-      - mkdir -p /app/lib/debug/lib/i386-linux-gnu
-      - mkdir -p /app/lib/i386-linux-gnu/GL
-      - install -Dm644 ld.so.conf /app/etc/ld.so.conf
+      - install -Dm644 ld.so.conf -t /app/etc/
     sources:
       - type: file
-        dest-filename: ld.so.conf
-        url: data:/app/lib32%0A/app/lib/i386-linux-gnu%0A
+        path: ld.so.conf
+
   - name: grapejuice
     buildsystem: simple
     build-commands:
@@ -71,6 +70,7 @@ modules:
       # install wine
       - tar --use-compress-program=unzstd -xvf debuntu-wine-tkg-staging-fsync-git-7.1.r2.gc437a01e.tar.zst
       - mv wine-tkg-staging-fsync-git-7.1.r2.gc437a01e /app/patched_wine
+
       # normal grapejuice desktop entries aren't exported anyway, so there's no need to delete them.
       # install grapejuice desktop entry
       - install -Dm644 src/grapejuice_common/assets/desktop/grapejuice.desktop /app/share/applications/net.brinkervii.grapejuice.desktop
@@ -85,6 +85,7 @@ modules:
       - desktop-file-edit /app/share/applications/net.brinkervii.grapejuice.robloxplayer.desktop --set-icon="net.brinkervii.grapejuice.robloxplayer" --set-key="Exec" --set-value="grapejuice player %u"
       # edit robloxstudio.desktop
       - desktop-file-edit /app/share/applications/net.brinkervii.grapejuice.robloxstudio.desktop --set-icon="net.brinkervii.grapejuice.robloxstudio" --set-key="Exec" --set-value="grapejuice studio %u"
+
       # install grapejuice icons
       # 64x64 icons
       - install -Dm644 src/grapejuice_common/assets/icons/hicolor/64x64/apps/grapejuice-roblox-player.png /app/share/icons/hicolor/64x64/apps/net.brinkervii.grapejuice.robloxplayer.png
