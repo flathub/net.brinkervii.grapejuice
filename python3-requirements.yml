@@ -58,8 +58,8 @@ modules:
         url: https://files.pythonhosted.org/packages/db/51/a507c856293ab05cdc1db77ff4bc1268ddd39f29e7dc4919aa497f0adbec/charset_normalizer-2.1.1-py3-none-any.whl
         sha256: 83e9a75d1911279afd89352c68b45348559d1fc0506b054b346651b5e7fee29f
       - type: file
-        url: https://files.pythonhosted.org/packages/6a/34/cd29f4dd8a23ce45f2b8ce9631ff2d4205fb74eddb412a3dc4fd1e4aa800/certifi-2022.9.14-py3-none-any.whl
-        sha256: e232343de1ab72c2aa521b625c80f699e356830fd0e2c620b465b304b17b0516
+        url: https://files.pythonhosted.org/packages/1d/38/fa96a426e0c0e68aabc68e896584b83ad1eec779265a028e156ce509630e/certifi-2022.9.24-py3-none-any.whl
+        sha256: 90c1a32f1d68f940488354e36370f6cca89f0f106db09518524c88d6ed83f382
       - type: file
         url: https://files.pythonhosted.org/packages/ca/91/6d9b8ccacd0412c08820f72cebaa4f0c0441b5cda699c90f618b6f8a1b42/requests-2.28.1-py3-none-any.whl
         sha256: 8fefa2a1a1365bf5520aac41836fbee479da67864514bdb821f31ce07ce65349
@@ -70,8 +70,8 @@ modules:
         --prefix=${FLATPAK_DEST} "Unidecode" --no-build-isolation
     sources:
       - type: file
-        url: https://files.pythonhosted.org/packages/f9/5b/7603add7f192252916b85927263b598c74585f82389e6e42318a6278159b/Unidecode-1.3.4-py3-none-any.whl
-        sha256: afa04efcdd818a93237574791be9b2817d7077c25a068b00f8cff7baa4e59257
+        url: https://files.pythonhosted.org/packages/be/ea/90e14e807da5a39e5b16789acacd48d63ca3e4f23dfa964a840eeadebb13/Unidecode-1.3.6-py3-none-any.whl
+        sha256: 547d7c479e4f377b430dd91ac1275d593308dce0fc464fb2ab7d41f82ec653be
   - name: python3-Click
     buildsystem: simple
     build-commands:
