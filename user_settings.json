@@ -1,11 +1,7 @@
 {
   "__version__": 2,
   "__hardware_profile__": null,
-  "show_fast_flag_warning": true,
-  "no_daemon_mode": true,
-  "release_channel": "master",
-  "disable_updates": false,
-  "ignore_wine_version": false,
+  "disable_updates": true,
   "try_profiling_hardware": false,
   "default_wine_home": "/app/patched_wine",
   "wineprefixes": [
@@ -41,7 +37,7 @@
       "priority": 0,
       "name_on_disk": "studio",
       "display_name": "Studio",
-      "wine_home": "/app/patched_wine/",
+      "wine_home": "/app/patched_wine",
       "dll_overrides": "dxdiagn=;winemenubuilder.exe=",
       "prime_offload_sink": -1,
       "use_mesa_gl_override": false,
