@@ -11,7 +11,7 @@ finish-args:
         - --share=ipc
         - --socket=wayland
         # Original device setting before the controller problems were discovered
-        #- --device=dri # Uncomment if --device=all is removed/commented to fix graphics issues
+        - --device=dri # ABSOLUTELY REQUIRED FOR 3D ACCEL
         - --allow=devel # Necessary for VMProtect to function.
         - --socket=pulseaudio
         - --allow=multiarch
