@@ -55,7 +55,7 @@
       },
       "third_party": {
         "fps_unlocker": false,
-        "dxvk": true
+        "dxvk": false
       }
     }
   ],

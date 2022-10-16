@@ -11,6 +11,7 @@ finish-args:
         - --share=ipc
         - --socket=wayland
         # Original device setting before the controller problems were discovered
+        # Note: Having this setting disabled causes very rare issues as seen in the helpdesk
         #- --device=dri # Uncomment if --device=all is removed/commented to fix graphics issues
         - --allow=devel # Necessary for VMProtect to function.
         - --socket=pulseaudio
@@ -109,10 +110,8 @@ modules:
         sha512: b60dd9628a592bef596049ff144ccdb7c2518afdbc70e32464f0d519122de4b2870ad8b7049f91acb876d302cde9189e899d54b615136d3bae1c0cc1bc2810da
       - type: git
         url: https://gitlab.com/brinkervii/grapejuice.git
-        tag: v5.5.7
-        commit: 0f025a9fe745b93f57cda1ec30b77c8e6813cf15
-      - type: patch
-        path: logpathhack.patch
+        tag: v6.0.0
+        commit: 3342e878498c519ed6df21b62700bf58803476a6
       - type: patch
         path: patchbinaries.patch
       - type: file
