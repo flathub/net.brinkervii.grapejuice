@@ -20,6 +20,10 @@
 			<caption>The main window of Grapejuice</caption>
 			<image type="source" width="1009" height="619">https://media.discordapp.net/attachments/563966858462625822/996349189023866930/unknown.png</image>
 		</screenshot>
+		<screenshot>
+			<caption>A demonstration of Grapejuice</caption>
+			<video codec="vp9" width="1920" height="1080">https://cdn.discordapp.com/attachments/1004888837878722621/1033943850579918910/grapejuice-flatpak-demo.webm</video>
+		</screenshot>
 	</screenshots>
 	<releases>
 		<release version="6.2.2" date="2022-10-16"/>
