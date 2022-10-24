@@ -22,7 +22,7 @@
 		</screenshot>
 		<screenshot>
 			<caption>A demonstration of Grapejuice</caption>
-			<video codec="vp9" width="1920" height="1080">https://cdn.discordapp.com/attachments/1004888837878722621/1033943850579918910/grapejuice-flatpak-demo.webm</video>
+			<video container="webm" codec="vp9" width="1920" height="1080">https://cdn.discordapp.com/attachments/1004888837878722621/1033943850579918910/grapejuice-flatpak-demo.webm</video>
 		</screenshot>
 	</screenshots>
 	<releases>
