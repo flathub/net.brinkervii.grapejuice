@@ -110,8 +110,8 @@ modules:
         sha512: b60dd9628a592bef596049ff144ccdb7c2518afdbc70e32464f0d519122de4b2870ad8b7049f91acb876d302cde9189e899d54b615136d3bae1c0cc1bc2810da
       - type: git
         url: https://gitlab.com/brinkervii/grapejuice.git
-        tag: v6.2.2
-        commit: 0e9f0000894155ee079a43756cd9212a9c72584b
+        #tag: v6.2.2
+        commit: d18420fb7098c9de5c5729f92453e612540e9674
       - type: patch
         path: patchbinaries.patch
       - type: file
