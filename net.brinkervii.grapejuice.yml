@@ -92,6 +92,9 @@ modules:
       # edit robloxstudio-auth.desktop
       - desktop-file-edit /app/share/applications/net.brinkervii.grapejuice.robloxstudio-auth.desktop --set-icon="net.brinkervii.grapejuice.robloxstudio" --set-key="Exec" --set-value="grapejuice studio-auth %u"
 
+      # alter the studio auth mime data
+      - desktop-file-edit /app/share/applications/net.brinkervii.grapejuice.robloxstudio-auth.desktop --set-key="MimeType" --set-value="x-scheme-handler/roblox-studio-auth;application/x-roblox-rbxl;application/x-roblox-rbxlx"
+
       # install grapejuice icons
       # 64x64 icons
       - install -Dm644 src/grapejuice_common/assets/icons/hicolor/64x64/apps/grapejuice-roblox-player.png /app/share/icons/hicolor/64x64/apps/net.brinkervii.grapejuice.robloxplayer.png
