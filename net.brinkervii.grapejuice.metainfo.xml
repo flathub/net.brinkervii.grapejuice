@@ -12,7 +12,8 @@
 	<categories>
 		<category>Game</category>
 	</categories>
-	<url type="homepage">https://gitlab.com/brinkervii/grapejuice/</url>
+	<url type="homepage">https://gitlab.com/brinkervii/grapejuice</url>
+	<url type="bugtracker">https://github.com/flathub/net.brinkervii.grapejuice/issues</url>
 	<project_license>GPL-3.0-only</project_license>
 	<developer_name>The Grapejuice Developers</developer_name>
 	<screenshots>
@@ -26,7 +27,27 @@
 		</screenshot>
 	</screenshots>
 	<releases>
-		<release version="6.2.2" date="2022-10-16"/>
+		<release version="7.1.0" date="2022-11-04">
+			<description>
+				<p>Obligatory "I HAVE THE STUPID" release</p>
+				<p>This version of Grapejuice brings:</p>
+				<ul>
+					<li>A bug fix for the Grapejuice self-updater</li>
+				</ul>
+			</description>
+		</release>
+		<release version="7.0.0" date="2022-11-04">
+			<description>
+				<p>A new major release!</p>
+				<p>This version of Grapejuice brings:</p>
+				<ul>
+					<li>Support for the new roblox-studio-auth protocol</li>
+					<li>Support for the Developer Deep linking protocol</li>
+				</ul>
+				<p>And the reason for the major version bump:</p>
+				<p>Grapejuice settings are now validated using Pydantic. That means large parts of Grapejuice internals had to be changed.</p>
+			</description>
+		</release>
 	</releases>
 	<content_rating type="oars-1.1">
 		<content_attribute id="violence-cartoon">moderate</content_attribute>
