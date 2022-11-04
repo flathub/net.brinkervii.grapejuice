@@ -92,9 +92,6 @@ modules:
       # edit robloxstudio-auth.desktop
       - desktop-file-edit /app/share/applications/net.brinkervii.grapejuice.robloxstudio-auth.desktop --set-icon="net.brinkervii.grapejuice.robloxstudio" --set-key="Exec" --set-value="grapejuice studio-auth %u"
 
-      # alter the studio auth mime data
-      - desktop-file-edit /app/share/applications/net.brinkervii.grapejuice.robloxstudio-auth.desktop --set-key="MimeType" --set-value="x-scheme-handler/roblox-studio-auth;application/x-roblox-rbxl;application/x-roblox-rbxlx"
-
       # install grapejuice icons
       # 64x64 icons
       - install -Dm644 src/grapejuice_common/assets/icons/hicolor/64x64/apps/grapejuice-roblox-player.png /app/share/icons/hicolor/64x64/apps/net.brinkervii.grapejuice.robloxplayer.png
@@ -116,8 +113,8 @@ modules:
         sha512: b60dd9628a592bef596049ff144ccdb7c2518afdbc70e32464f0d519122de4b2870ad8b7049f91acb876d302cde9189e899d54b615136d3bae1c0cc1bc2810da
       - type: git
         url: https://gitlab.com/brinkervii/grapejuice.git
-        #tag: v6.2.2
-        commit: d18420fb7098c9de5c5729f92453e612540e9674
+        tag: v7.1.0
+        commit: 0ba358ee73438347cf049dfe262e73b73c9c77be
       - type: patch
         path: patchbinaries.patch
       - type: file
