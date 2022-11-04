@@ -80,6 +80,7 @@ modules:
       - install -Dm644 src/grapejuice_common/assets/desktop/roblox-app.desktop /app/share/applications/net.brinkervii.grapejuice.robloxapp.desktop
       - install -Dm644 src/grapejuice_common/assets/desktop/roblox-player.desktop /app/share/applications/net.brinkervii.grapejuice.robloxplayer.desktop
       - install -Dm644 src/grapejuice_common/assets/desktop/roblox-studio.desktop /app/share/applications/net.brinkervii.grapejuice.robloxstudio.desktop
+      - install -Dm644 src/grapejuice_common/assets/desktop/roblox-studio-auth.desktop /app/share/applications/net.brinkervii.grapejuice.robloxstudio-auth.desktop
       # edit grapejuice.desktop
       - desktop-file-edit /app/share/applications/net.brinkervii.grapejuice.desktop --set-icon="net.brinkervii.grapejuice" --set-key="Exec" --set-value="grapejuice gui"
       # edit robloxapp.desktop
@@ -88,6 +89,8 @@ modules:
       - desktop-file-edit /app/share/applications/net.brinkervii.grapejuice.robloxplayer.desktop --set-icon="net.brinkervii.grapejuice.robloxplayer" --set-key="Exec" --set-value="grapejuice player %u"
       # edit robloxstudio.desktop
       - desktop-file-edit /app/share/applications/net.brinkervii.grapejuice.robloxstudio.desktop --set-icon="net.brinkervii.grapejuice.robloxstudio" --set-key="Exec" --set-value="grapejuice studio %u"
+      # edit robloxstudio-auth.desktop
+      - desktop-file-edit /app/share/applications/net.brinkervii.grapejuice.robloxstudio-auth.desktop --set-icon="net.brinkervii.grapejuice.robloxstudio" --set-key="Exec" --set-value="grapejuice studio-auth %u"
 
       # install grapejuice icons
       # 64x64 icons
@@ -110,8 +113,8 @@ modules:
         sha512: b60dd9628a592bef596049ff144ccdb7c2518afdbc70e32464f0d519122de4b2870ad8b7049f91acb876d302cde9189e899d54b615136d3bae1c0cc1bc2810da
       - type: git
         url: https://gitlab.com/brinkervii/grapejuice.git
-        tag: v6.2.2
-        commit: 0e9f0000894155ee079a43756cd9212a9c72584b
+        tag: v7.1.0
+        commit: 0ba358ee73438347cf049dfe262e73b73c9c77be
       - type: patch
         path: patchbinaries.patch
       - type: file
