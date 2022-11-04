@@ -7,7 +7,7 @@ separate-locales: false
 
 finish-args:
         - --share=network
-        - --socket=x11
+        - --socket=x11 # Will be removed or replaced with fallback-x11 once Wine is improved
         - --share=ipc
         - --socket=wayland
         # Original device setting before the controller problems were discovered
@@ -62,37 +62,37 @@ modules:
   - name: grapejuice
     buildsystem: simple
     build-commands:
-      # install usersettings
+      # Install user_settings.json to preconfigure settings
       - install -Dm644 user_settings.json /app
-      # use grapejuice packaging module
+      # Run Grapejuice packaging module
       - PYTHONPATH=$(pwd)/src python3 -m grapejuice_packaging linux_package
       - cp -r build/linux_package/usr/* /app
       - mkdir -p /app/lib/python3.10/pip_deps
       - mkdir /app/locales
       - pip3 install $(pwd) --target=/app/lib/python3.10/pip_deps --no-deps --no-index
-      # install wine
+      # Install Wine
       - tar --use-compress-program=unzstd -xvf debuntu-wine-tkg-staging-fsync-git-7.1.r2.gc437a01e.tar.zst
       - mv wine-tkg-staging-fsync-git-7.1.r2.gc437a01e /app/patched_wine
 
-      # normal grapejuice desktop entries aren't exported anyway, so there's no need to delete them.
-      # install grapejuice desktop entry
+      # Normal Grapejuice desktop entries aren't exported anyway, so there's no need to delete them.
+      # Install Grapejuice desktop entries
       - install -Dm644 src/grapejuice_common/assets/desktop/grapejuice.desktop /app/share/applications/net.brinkervii.grapejuice.desktop
       - install -Dm644 src/grapejuice_common/assets/desktop/roblox-app.desktop /app/share/applications/net.brinkervii.grapejuice.robloxapp.desktop
       - install -Dm644 src/grapejuice_common/assets/desktop/roblox-player.desktop /app/share/applications/net.brinkervii.grapejuice.robloxplayer.desktop
       - install -Dm644 src/grapejuice_common/assets/desktop/roblox-studio.desktop /app/share/applications/net.brinkervii.grapejuice.robloxstudio.desktop
-      - install -Dm644 src/grapejuice_common/assets/desktop/roblox-studio-auth.desktop /app/share/applications/net.brinkervii.grapejuice.robloxstudio-auth.desktop
-      # edit grapejuice.desktop
+      - install -Dm644 src/grapejuice_common/assets/desktop/roblox-studio-auth.desktop /app/share/applications/net.brinkervii.grapejuice.robloxstudioauth.desktop
+      # Edit Grapejuice shortcut
       - desktop-file-edit /app/share/applications/net.brinkervii.grapejuice.desktop --set-icon="net.brinkervii.grapejuice" --set-key="Exec" --set-value="grapejuice gui"
-      # edit robloxapp.desktop
+      # Edit Roblox App shortcut
       - desktop-file-edit /app/share/applications/net.brinkervii.grapejuice.robloxapp.desktop --set-icon="net.brinkervii.grapejuice.robloxapp" --set-key="Exec" --set-value="grapejuice app"
-      # edit robloxplayer.desktop
+      # Edit Roblox Player shortcut
       - desktop-file-edit /app/share/applications/net.brinkervii.grapejuice.robloxplayer.desktop --set-icon="net.brinkervii.grapejuice.robloxplayer" --set-key="Exec" --set-value="grapejuice player %u"
-      # edit robloxstudio.desktop
+      # Edit Roblox Studio shortcut
       - desktop-file-edit /app/share/applications/net.brinkervii.grapejuice.robloxstudio.desktop --set-icon="net.brinkervii.grapejuice.robloxstudio" --set-key="Exec" --set-value="grapejuice studio %u"
-      # edit robloxstudio-auth.desktop
-      - desktop-file-edit /app/share/applications/net.brinkervii.grapejuice.robloxstudio-auth.desktop --set-icon="net.brinkervii.grapejuice.robloxstudio" --set-key="Exec" --set-value="grapejuice studio-auth %u"
+      # Edit Roblox Studio authentication shortcut
+      - desktop-file-edit /app/share/applications/net.brinkervii.grapejuice.robloxstudioauth.desktop --set-icon="net.brinkervii.grapejuice.robloxstudio" --set-key="Exec" --set-value="grapejuice studio-auth %u"
 
-      # install grapejuice icons
+      # Install Grapejuice icons
       # 64x64 icons
       - install -Dm644 src/grapejuice_common/assets/icons/hicolor/64x64/apps/grapejuice-roblox-player.png /app/share/icons/hicolor/64x64/apps/net.brinkervii.grapejuice.robloxplayer.png
       - install -Dm644 src/grapejuice_common/assets/icons/hicolor/64x64/apps/grapejuice-roblox-studio.png /app/share/icons/hicolor/64x64/apps/net.brinkervii.grapejuice.robloxstudio.png
@@ -103,9 +103,9 @@ modules:
       - install -Dm644 src/grapejuice_common/assets/icons/hicolor/128x128/apps/grapejuice-roblox-studio.png /app/share/icons/hicolor/128x128/apps/net.brinkervii.grapejuice.robloxstudio.png
       - install -Dm644 src/grapejuice_common/assets/icons/hicolor/128x128/apps/grapejuice-roblox-player.png /app/share/icons/hicolor/128x128/apps/net.brinkervii.grapejuice.robloxapp.png
       - install -Dm644 src/grapejuice_common/assets/icons/hicolor/128x128/apps/grapejuice.png /app/share/icons/hicolor/128x128/apps/net.brinkervii.grapejuice.png
-      # scalable icons
+      # Scalable/vector icons
       - install -Dm644 src/grapejuice_common/assets/icons/hicolor/scalable/apps/grapejuice.svg /app/share/icons/hicolor/scalable/apps/net.brinkervii.grapejuice.svg
-      # install metainfo
+      # Install AppStream data/metainfo
       - install -Dm644 net.brinkervii.grapejuice.metainfo.xml -t /app/share/metainfo
     sources:
       - type: file
@@ -116,7 +116,7 @@ modules:
         tag: v7.1.0
         commit: 0ba358ee73438347cf049dfe262e73b73c9c77be
       - type: patch
-        path: patchbinaries.patch
+        path: patch_binaries.patch
       - type: file
         path: user_settings.json
       - type: file

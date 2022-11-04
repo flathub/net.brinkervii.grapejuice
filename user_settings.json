@@ -1,6 +1,6 @@
 {
-  "__version__": 2,
-  "__hardware_profile__": null,
+  "version": 3,
+  "hardware_profile": null,
   "disable_updates": true,
   "try_profiling_hardware": false,
   "default_wine_home": "/app/patched_wine",
