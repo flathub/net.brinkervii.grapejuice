@@ -27,6 +27,15 @@
 		</screenshot>
 	</screenshots>
 	<releases>
+		<release version="7.2.0" date="2022-11-06">
+			<description>
+				<p>Minor Bugfix</p>
+				<p>This version of Grapejuice brings:</p>
+				<ul>
+					<li>Minor fix: fixes boolean fast flag being converted to integers through Pydantic parsing.</li>
+				</ul>
+			</description>
+		</release>
 		<release version="7.1.0" date="2022-11-04">
 			<description>
 				<p>Obligatory "I HAVE THE STUPID" release</p>
