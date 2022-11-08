@@ -71,8 +71,8 @@ modules:
       - mkdir /app/locales
       - pip3 install $(pwd) --target=/app/lib/python3.10/pip_deps --no-deps --no-index
       # Install Wine
-      - tar --use-compress-program=unzstd -xvf debuntu-wine-tkg-staging-fsync-git-7.1.r2.gc437a01e.tar.zst
-      - mv wine-tkg-staging-fsync-git-7.1.r2.gc437a01e /app/patched_wine
+      - tar --use-compress-program=unzstd -xvf debuntu-wine-tkg-staging-fsync-git-7.20.r1.gbd2608b1.tar.zst
+      - mv wine-tkg-staging-fsync-git-7.20.r1.gbd2608b1 /app/patched_wine
 
       # Normal Grapejuice desktop entries aren't exported anyway, so there's no need to delete them.
       # Install Grapejuice desktop entries
@@ -109,8 +109,8 @@ modules:
       - install -Dm644 net.brinkervii.grapejuice.metainfo.xml -t /app/share/metainfo
     sources:
       - type: file
-        url: https://gitlab.com/brinkervii/wine-builds/-/raw/main/debuntu-wine-tkg-staging-fsync-git-7.1.r2.gc437a01e.tar.zst?inline=false
-        sha512: b60dd9628a592bef596049ff144ccdb7c2518afdbc70e32464f0d519122de4b2870ad8b7049f91acb876d302cde9189e899d54b615136d3bae1c0cc1bc2810da
+        url: https://gitlab.com/brinkervii/wine-builds/-/raw/main/debuntu-wine-tkg-staging-fsync-git-7.20.r1.gbd2608b1.tar.zst?inline=false
+        sha512: 762faf86a9fec7a85c3d9d4c8011cd8b95e6ad08c9e464823e7264d0f2c0f584965fa5263c4246387ddae542256bb3cbe3f073d64fda21da1df387a6af3c3d6d
       - type: git
         url: https://gitlab.com/brinkervii/grapejuice.git
         tag: v7.2.0
