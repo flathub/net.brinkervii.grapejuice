@@ -27,34 +27,13 @@
 		</screenshot>
 	</screenshots>
 	<releases>
-		<release version="7.2.0" date="2022-11-06">
+		<release version="7.2.1" date="2022-12-16">
 			<description>
-				<p>Minor Bugfix</p>
+				<p>A new release!</p>
 				<p>This version of Grapejuice brings:</p>
 				<ul>
-					<li>Minor fix: fixes boolean fast flag being converted to integers through Pydantic parsing.</li>
+					<li>New studio icon</li>
 				</ul>
-			</description>
-		</release>
-		<release version="7.1.0" date="2022-11-04">
-			<description>
-				<p>Obligatory "I HAVE THE STUPID" release</p>
-				<p>This version of Grapejuice brings:</p>
-				<ul>
-					<li>A bug fix for the Grapejuice self-updater</li>
-				</ul>
-			</description>
-		</release>
-		<release version="7.0.0" date="2022-11-04">
-			<description>
-				<p>A new major release!</p>
-				<p>This version of Grapejuice brings:</p>
-				<ul>
-					<li>Support for the new roblox-studio-auth protocol</li>
-					<li>Support for the Developer Deep linking protocol</li>
-				</ul>
-				<p>And the reason for the major version bump:</p>
-				<p>Grapejuice settings are now validated using Pydantic. That means large parts of Grapejuice internals had to be changed.</p>
 			</description>
 		</release>
 	</releases>
