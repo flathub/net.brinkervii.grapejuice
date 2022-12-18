@@ -32,9 +32,16 @@ add-extensions:
                 merge-dirs: vulkan/icd.d;glvnd/egl_vendor.d;OpenCL/vendors;lib/dri;lib/d3d;vulkan/explicit_layer.d;vulkan/implicit_layer.d
                 download-if: active-gl-driver
                 enable-if: active-gl-driver
-modules:
-  - python3-requirements.yml
 
+cleanup:
+  # pygobject headers
+  - /include
+  # python-unidecode
+  - /bin/unidecode
+  # python-charset-normalizer
+  - /bin/normalizer
+
+modules:
   - name: xrandr
     buildsystem: simple
     build-commands:
@@ -58,6 +65,8 @@ modules:
     sources:
       - type: file
         path: ld.so.conf
+
+  - python3-requirements.yml
 
   - name: grapejuice
     buildsystem: simple
