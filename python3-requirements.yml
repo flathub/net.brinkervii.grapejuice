@@ -1,3 +1,8 @@
+# To generate this file correctly using flatpak-pip-generator:
+# 1. Open 'requirements.txt', found in Grapejuice's root folder.
+# 2. Add 'pycairo' at the very top.
+# 3. Save the file and run the command below:
+#    flatpak-pip-generator --checker-data --output python3-requirements --requirements-file requirements.txt --runtime org.freedesktop.Sdk//22.08 --yaml
 build-commands: []
 buildsystem: simple
 modules:
@@ -9,8 +14,11 @@ modules:
     sources:
       - &id001
         type: file
-        url: https://files.pythonhosted.org/packages/92/a4/506564f574fa74c90b98690e8ecc8dbae1629f31fcfe0be69de45d9e1605/pycairo-1.21.0.tar.gz
-        sha256: 251907f18a552df938aa3386657ff4b5a4937dde70e11aa042bc297957f4b74b
+        url: https://files.pythonhosted.org/packages/69/ca/9e9fa2e8be0876a9bbf046a1be7ee33e61d4fdfbd1fd25c76c1bdfddf8c4/pycairo-1.23.0.tar.gz
+        sha256: 9b61ac818723adc04367301317eb2e814a83522f07bbd1f409af0dada463c44c
+        x-checker-data:
+          name: pycairo
+          type: pypi
   - name: python3-psutil
     buildsystem: simple
     build-commands:
@@ -18,8 +26,11 @@ modules:
         --prefix=${FLATPAK_DEST} "psutil" --no-build-isolation
     sources:
       - type: file
-        url: https://files.pythonhosted.org/packages/de/eb/1c01a34c86ee3b058c556e407ce5b07cb7d186ebe47b3e69d6f152ca5cc5/psutil-5.9.3.tar.gz
-        sha256: 7ccfcdfea4fc4b0a02ca2c31de7fcd186beb9cff8207800e14ab66f79c773af6
+        url: https://files.pythonhosted.org/packages/3d/7d/d05864a69e452f003c0d77e728e155a89a2a26b09e64860ddd70ad64fb26/psutil-5.9.4.tar.gz
+        sha256: 3d7f9739eb435d4b1338944abe23f49584bde5395f27487d2ee25ad9a8774a62
+        x-checker-data:
+          name: psutil
+          type: pypi
   - name: python3-PyGObject
     buildsystem: simple
     build-commands:
@@ -29,6 +40,10 @@ modules:
       - type: file
         url: https://files.pythonhosted.org/packages/fe/40/9afaeb8d3b453fb8596fcb6c7bc2b64e434868c91eda19955742778eff74/PyGObject-3.42.2.tar.gz
         sha256: 21524cef33100c8fd59dc135948b703d79d303e368ce71fa60521cc971cd8aa7
+        x-checker-data:
+          name: PyGObject
+          type: pypi
+      - *id001
   - name: python3-packaging
     buildsystem: simple
     build-commands:
@@ -36,11 +51,12 @@ modules:
         --prefix=${FLATPAK_DEST} "packaging" --no-build-isolation
     sources:
       - type: file
-        url: https://files.pythonhosted.org/packages/6c/10/a7d0fa5baea8fe7b50f448ab742f26f52b80bfca85ac2be9d35cdd9a3246/pyparsing-3.0.9-py3-none-any.whl
-        sha256: 5026bae9a10eeaefb61dab2f09052b9f4307d44aee4eda64b309723d8d206bbc
-      - type: file
-        url: https://files.pythonhosted.org/packages/05/8e/8de486cbd03baba4deef4142bd643a3e7bbe954a784dc1bb17142572d127/packaging-21.3-py3-none-any.whl
-        sha256: ef103e05f519cdc783ae24ea4e2e0f508a9c99b2d4969652eed6a2e1ea5bd522
+        url: https://files.pythonhosted.org/packages/8f/7b/42582927d281d7cb035609cd3a543ffac89b74f3f4ee8e1c50914bcb57eb/packaging-22.0-py3-none-any.whl
+        sha256: 957e2148ba0e1a3b282772e791ef1d8083648bc131c8ab0c1feba110ce1146c3
+        x-checker-data:
+          name: packaging
+          packagetype: bdist_wheel
+          type: pypi
   - name: python3-requests
     buildsystem: simple
     build-commands:
@@ -48,20 +64,40 @@ modules:
         --prefix=${FLATPAK_DEST} "requests" --no-build-isolation
     sources:
       - type: file
-        url: https://files.pythonhosted.org/packages/6f/de/5be2e3eed8426f871b170663333a0f627fc2924cc386cd41be065e7ea870/urllib3-1.26.12-py2.py3-none-any.whl
-        sha256: b930dd878d5a8afb066a637fbb35144fe7901e3b209d1cd4f524bd0e9deee997
-      - type: file
-        url: https://files.pythonhosted.org/packages/fc/34/3030de6f1370931b9dbb4dad48f6ab1015ab1d32447850b9fc94e60097be/idna-3.4-py3-none-any.whl
-        sha256: 90b77e79eaa3eba6de819a0c442c0b4ceefc341a7a2ab77d7562bf49f425c5c2
+        url: https://files.pythonhosted.org/packages/71/4c/3db2b8021bd6f2f0ceb0e088d6b2d49147671f25832fb17970e9b583d742/certifi-2022.12.7-py3-none-any.whl
+        sha256: 4ad3232f5e926d6718ec31cfc1fcadfde020920e278684144551c91769c7bc18
+        x-checker-data:
+          name: certifi
+          packagetype: bdist_wheel
+          type: pypi
       - type: file
         url: https://files.pythonhosted.org/packages/db/51/a507c856293ab05cdc1db77ff4bc1268ddd39f29e7dc4919aa497f0adbec/charset_normalizer-2.1.1-py3-none-any.whl
         sha256: 83e9a75d1911279afd89352c68b45348559d1fc0506b054b346651b5e7fee29f
+        x-checker-data:
+          name: charset_normalizer
+          packagetype: bdist_wheel
+          type: pypi
       - type: file
-        url: https://files.pythonhosted.org/packages/1d/38/fa96a426e0c0e68aabc68e896584b83ad1eec779265a028e156ce509630e/certifi-2022.9.24-py3-none-any.whl
-        sha256: 90c1a32f1d68f940488354e36370f6cca89f0f106db09518524c88d6ed83f382
+        url: https://files.pythonhosted.org/packages/fc/34/3030de6f1370931b9dbb4dad48f6ab1015ab1d32447850b9fc94e60097be/idna-3.4-py3-none-any.whl
+        sha256: 90b77e79eaa3eba6de819a0c442c0b4ceefc341a7a2ab77d7562bf49f425c5c2
+        x-checker-data:
+          name: idna
+          packagetype: bdist_wheel
+          type: pypi
       - type: file
         url: https://files.pythonhosted.org/packages/ca/91/6d9b8ccacd0412c08820f72cebaa4f0c0441b5cda699c90f618b6f8a1b42/requests-2.28.1-py3-none-any.whl
         sha256: 8fefa2a1a1365bf5520aac41836fbee479da67864514bdb821f31ce07ce65349
+        x-checker-data:
+          name: requests
+          packagetype: bdist_wheel
+          type: pypi
+      - type: file
+        url: https://files.pythonhosted.org/packages/65/0c/cc6644eaa594585e5875f46f3c83ee8762b647b51fc5b0fb253a242df2dc/urllib3-1.26.13-py2.py3-none-any.whl
+        sha256: 47cc05d99aaa09c9e72ed5809b60e7ba354e64b59c9c173ac3018642d8bb41fc
+        x-checker-data:
+          name: urllib3
+          packagetype: bdist_wheel
+          type: pypi
   - name: python3-Unidecode
     buildsystem: simple
     build-commands:
@@ -71,6 +107,10 @@ modules:
       - type: file
         url: https://files.pythonhosted.org/packages/be/ea/90e14e807da5a39e5b16789acacd48d63ca3e4f23dfa964a840eeadebb13/Unidecode-1.3.6-py3-none-any.whl
         sha256: 547d7c479e4f377b430dd91ac1275d593308dce0fc464fb2ab7d41f82ec653be
+        x-checker-data:
+          name: Unidecode
+          packagetype: bdist_wheel
+          type: pypi
   - name: python3-Click
     buildsystem: simple
     build-commands:
@@ -80,6 +120,10 @@ modules:
       - type: file
         url: https://files.pythonhosted.org/packages/c2/f1/df59e28c642d583f7dacffb1e0965d0e00b218e0186d7858ac5233dce840/click-8.1.3-py3-none-any.whl
         sha256: bb4d8133cb15a609f44e8213d9b391b0809795062913b383c62be0ee95b1db48
+        x-checker-data:
+          name: click
+          packagetype: bdist_wheel
+          type: pypi
   - name: python3-pydantic
     buildsystem: simple
     build-commands:
@@ -87,9 +131,16 @@ modules:
         --prefix=${FLATPAK_DEST} "pydantic" --no-build-isolation
     sources:
       - type: file
+        url: https://files.pythonhosted.org/packages/7d/7d/58dd62f792b002fa28cce4e83cb90f4359809e6d12db86eedf26a752895c/pydantic-1.10.2.tar.gz
+        sha256: 91b8e218852ef6007c2b98cd861601c6a09f1aa32bbbb74fab5b1c33d4a1e410
+        x-checker-data:
+          name: pydantic
+          type: pypi
+      - type: file
         url: https://files.pythonhosted.org/packages/0b/8e/f1a0a5a76cfef77e1eb6004cb49e5f8d72634da638420b9ea492ce8305e8/typing_extensions-4.4.0-py3-none-any.whl
         sha256: 16fa4864408f655d35ec496218b85f79b3437c829e93320c7c9215ccfd92489e
-      - type: file
-        url: https://files.pythonhosted.org/packages/d4/ec/230ab377c457cd68cfda78759e2a57f8c08a9e9adb4cd53c4d2fc9100b15/pydantic-1.10.2-py3-none-any.whl
-        sha256: 1b6ee725bd6e83ec78b1aa32c5b1fa67a3a65badddde3976bca5fe4568f27709
+        x-checker-data:
+          name: typing_extensions
+          packagetype: bdist_wheel
+          type: pypi
 name: python3-requirements
