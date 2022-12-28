@@ -32,22 +32,29 @@ add-extensions:
                 merge-dirs: vulkan/icd.d;glvnd/egl_vendor.d;OpenCL/vendors;lib/dri;lib/d3d;vulkan/explicit_layer.d;vulkan/implicit_layer.d
                 download-if: active-gl-driver
                 enable-if: active-gl-driver
-modules:
-  - python3-requirements.yml
 
+cleanup:
+  # pygobject headers
+  - /include
+  # python-unidecode
+  - /bin/unidecode
+  # python-charset-normalizer
+  - /bin/normalizer
+
+modules:
   - name: xrandr
-    buildsystem: simple
-    build-commands:
-      - $(pwd)/configure
-      - make $(pwd)/
-      - make install DESTDIR=/app/bin
-      - cp /app/bin/usr/local/bin/xkeystone /app/bin
-      - cp /app/bin/usr/local/bin/xrandr /app/bin
-      - rm -r /app/bin/usr
     sources:
       - type: archive
-        url: https://www.x.org/archive/individual/app/xrandr-1.5.1.tar.gz
-        sha256: 7b99edb7970a1365eaf5bcaf552144e4dfc3ccf510c4abc08569849929fb366e
+        url: https://xorg.freedesktop.org/archive/individual/app/xrandr-1.5.2.tar.xz
+        sha256: c8bee4790d9058bacc4b6246456c58021db58a87ddda1a9d0139bf5f18f1f240
+        x-checker-data:
+          type: anitya
+          project-id: 14957
+          stable-only: true
+          url-template: https://xorg.freedesktop.org/archive/individual/app/xrandr-$version.tar.xz
+    cleanup:
+      - /share/man
+      - /bin/xkeystone
 
   - name: bundle-setup
     buildsystem: simple
@@ -58,6 +65,8 @@ modules:
     sources:
       - type: file
         path: ld.so.conf
+
+  - python3-requirements.yml
 
   - name: grapejuice
     buildsystem: simple
@@ -113,8 +122,8 @@ modules:
         sha512: 762faf86a9fec7a85c3d9d4c8011cd8b95e6ad08c9e464823e7264d0f2c0f584965fa5263c4246387ddae542256bb3cbe3f073d64fda21da1df387a6af3c3d6d
       - type: git
         url: https://gitlab.com/brinkervii/grapejuice.git
-        tag: v7.2.0
-        commit: a700b5c37bc4d336a1f35c621ce010751bc2f053
+        tag: v7.2.1
+        commit: 80986fbecab5b867a71bd523062699d1cd86f7bb
       - type: patch
         path: patch_binaries.patch
       - type: file
