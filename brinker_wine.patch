@@ -1,0 +1,31 @@
+diff --git a/wine-tkg-git/customization.cfg b/wine-tkg-git/customization.cfg
+index b48b74a6..9d51d3aa 100644
+--- a/wine-tkg-git/customization.cfg
++++ b/wine-tkg-git/customization.cfg
+@@ -16,7 +16,7 @@ _nomakepkg_prefix_path=""
+ _nomakepkg_midbuild_prompt="false"
+ 
+ # Set to the distro of your choice to attempt dependency resolution. Valid options are "debuntu" (for debian, ubuntu and similar), "fedora" or "archlinux".
+-_nomakepkg_dep_resolution_distro=""
++_nomakepkg_dep_resolution_distro="debuntu"
+ 
+ 
+ #### EXTERNAL INSTALLATION SETTINGS - !! ONLY AFFECTS MAKEPKG !! ####
+@@ -141,7 +141,7 @@ _quake_champions_fix="false"
+ _launch_with_dedicated_gpu="false"
+ 
+ # Update winevulkan to whatever version I have pushed last, til next time, for new shiny and tasty vk extensions support. Thanks dadドイツ人 !
+-_update_winevulkan="false"
++_update_winevulkan="true"
+ 
+ # Joshua Ashton's take on making wine dialogs and menus less win95-ish - https://github.com/Joshua-Ashton/wine/tree/wine-better-theme
+ _use_josh_flat_theme="true"
+@@ -174,7 +174,7 @@ _protonify="false"
+ 
+ # community patches - add patches (separated by a space) of your choice by name from the community-patches dir - https://github.com/Frogging-Family/community-patches
+ # example: _community_patches="amdags.mypatch GNUTLShack.mypatch"
+-_community_patches=""
++_community_patches="0002-proton_LFH.mypatch"
+ 
+ # Automatically update community-patches from git - set to false if you don't want this behaviour, useful for example if you have your own fork.
+ _community_patches_auto_update="true"

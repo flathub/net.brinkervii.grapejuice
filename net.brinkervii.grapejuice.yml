@@ -6,127 +6,144 @@ command: grapejuice
 separate-locales: false
 
 finish-args:
-        - --share=network
-        - --socket=x11 # Will be removed or replaced with fallback-x11 once Wine is improved
-        - --share=ipc
-        - --socket=wayland
-        # Original device setting before the controller problems were discovered
-        # Note: Having this setting disabled causes very rare issues as seen in the helpdesk
-        #- --device=dri # Uncomment if --device=all is removed/commented to fix graphics issues
-        - --allow=devel # Necessary for VMProtect to function.
-        - --socket=pulseaudio
-        - --allow=multiarch
-        - --device=all # Necessary for controller support (important on Steam Deck)
+	- --share=network
+	- --socket=x11 # Will be removed or replaced with fallback-x11 once Wine is improved
+	- --share=ipc
+	- --socket=wayland
+	# Original device setting before the controller problems were discovered
+	# Note: Having this setting disabled causes very rare issues as seen in the helpdesk
+	#- --device=dri # Uncomment if --device=all is removed/commented to fix graphics issues
+	- --allow=devel # Necessary for VMProtect to function.
+	- --socket=pulseaudio
+	- --allow=multiarch
+	- --device=all # Necessary for controller support (important on Steam Deck)
 add-extensions:
-        org.freedesktop.Platform.Compat.i386:
-                directory: lib/i386-linux-gnu
-                version: '22.08'
-        org.freedesktop.Platform.GL32:
-                directory: lib/i386-linux-gnu/GL
-                version: '1.4'
-                versions: 22.08;1.4
-                subdirectories: true
-                no-autodownload: true
-                autodelete: false
-                add-ld-path: lib
-                merge-dirs: vulkan/icd.d;glvnd/egl_vendor.d;OpenCL/vendors;lib/dri;lib/d3d;vulkan/explicit_layer.d;vulkan/implicit_layer.d
-                download-if: active-gl-driver
-                enable-if: active-gl-driver
+	org.freedesktop.Platform.Compat.i386:
+		directory: lib/i386-linux-gnu
+		version: '22.08'
+	org.freedesktop.Platform.GL32:
+		directory: lib/i386-linux-gnu/GL
+		version: '1.4'
+		versions: 22.08;1.4
+		subdirectories: true
+		no-autodownload: true
+		autodelete: false
+		add-ld-path: lib
+		merge-dirs: vulkan/icd.d;glvnd/egl_vendor.d;OpenCL/vendors;lib/dri;lib/d3d;vulkan/explicit_layer.d;vulkan/implicit_layer.d
+		download-if: active-gl-driver
+		enable-if: active-gl-driver
 
 cleanup:
-  # pygobject headers
-  - /include
-  # python-unidecode
-  - /bin/unidecode
-  # python-charset-normalizer
-  - /bin/normalizer
+	# pygobject headers
+	- /include
+	# python-unidecode
+	- /bin/unidecode
+	# python-charset-normalizer
+	- /bin/normalizer
 
 modules:
-  - name: xrandr
-    sources:
-      - type: archive
-        url: https://xorg.freedesktop.org/archive/individual/app/xrandr-1.5.2.tar.xz
-        sha256: c8bee4790d9058bacc4b6246456c58021db58a87ddda1a9d0139bf5f18f1f240
-        x-checker-data:
-          type: anitya
-          project-id: 14957
-          stable-only: true
-          url-template: https://xorg.freedesktop.org/archive/individual/app/xrandr-$version.tar.xz
-    cleanup:
-      - /share/man
-      - /bin/xkeystone
+	- name: xrandr
+	sources:
+		- type: archive
+		url: https://xorg.freedesktop.org/archive/individual/app/xrandr-1.5.2.tar.xz
+		sha256: c8bee4790d9058bacc4b6246456c58021db58a87ddda1a9d0139bf5f18f1f240
+		x-checker-data:
+		  type: anitya
+		  project-id: 14957
+		  stable-only: true
+		  url-template: https://xorg.freedesktop.org/archive/individual/app/xrandr-$version.tar.xz
+		cleanup:
+		- /share/man
+		- /bin/xkeystone
 
-  - name: bundle-setup
-    buildsystem: simple
-    build-commands:
-      - mkdir -p /app/lib32
-      - mkdir -p /app/lib/i386-linux-gnu
-      - install -Dm644 ld.so.conf -t /app/etc/
-    sources:
-      - type: file
-        path: ld.so.conf
+	- name: bundle-setup
+		buildsystem: simple
+		build-commands:
+		- mkdir -p /app/lib32
+		- mkdir -p /app/lib/i386-linux-gnu
+		- install -Dm644 ld.so.conf -t /app/etc/
+		sources:
+	- type: file
+		path: ld.so.conf
 
-  - python3-requirements.yml
+	- python3-requirements.yml
 
-  - name: grapejuice
-    buildsystem: simple
-    build-commands:
-      # Install user_settings.json to preconfigure settings
-      - install -Dm644 user_settings.json /app
-      # Run Grapejuice packaging module
-      - PYTHONPATH=$(pwd)/src python3 -m grapejuice_packaging linux_package
-      - cp -r build/linux_package/usr/* /app
-      - mkdir -p /app/lib/python3.10/pip_deps
-      - mkdir /app/locales
-      - pip3 install $(pwd) --target=/app/lib/python3.10/pip_deps --no-deps --no-index
-      # Install Wine
-      - tar --use-compress-program=unzstd -xvf debuntu-wine-tkg-staging-fsync-git-7.1.r2.gc437a01e.tar.zst
-      - mv wine-tkg-staging-fsync-git-7.1.r2.gc437a01e /app/patched_wine
+	- name: wine
+	buildsystem: simple
+	build-commands:
+		# place proton LFH patch in wine-tkg userpatches
+		# apply brinker_wine.patch to wine-tkg
+		- install -Dm644 0002-proton_LFH.mypatch wine-tkg-git/wine-tkg-git/wine-tkg-userpatches
+	sources:
+		- type: file
+		path: 0002-proton_LFH.mypatch
+		- type: file
+		path: brinker_wine.patch
 
-      # Normal Grapejuice desktop entries aren't exported anyway, so there's no need to delete them.
-      # Install Grapejuice desktop entries
-      - install -Dm644 src/grapejuice_common/assets/desktop/grapejuice.desktop /app/share/applications/net.brinkervii.grapejuice.desktop
-      - install -Dm644 src/grapejuice_common/assets/desktop/roblox-app.desktop /app/share/applications/net.brinkervii.grapejuice.robloxapp.desktop
-      - install -Dm644 src/grapejuice_common/assets/desktop/roblox-player.desktop /app/share/applications/net.brinkervii.grapejuice.robloxplayer.desktop
-      - install -Dm644 src/grapejuice_common/assets/desktop/roblox-studio.desktop /app/share/applications/net.brinkervii.grapejuice.robloxstudio.desktop
-      - install -Dm644 src/grapejuice_common/assets/desktop/roblox-studio-auth.desktop /app/share/applications/net.brinkervii.grapejuice.robloxstudioauth.desktop
-      # Edit Grapejuice shortcut
-      - desktop-file-edit /app/share/applications/net.brinkervii.grapejuice.desktop --set-icon="net.brinkervii.grapejuice" --set-key="Exec" --set-value="grapejuice gui"
-      # Edit Roblox App shortcut
-      - desktop-file-edit /app/share/applications/net.brinkervii.grapejuice.robloxapp.desktop --set-icon="net.brinkervii.grapejuice.robloxapp" --set-key="Exec" --set-value="grapejuice app"
-      # Edit Roblox Player shortcut
-      - desktop-file-edit /app/share/applications/net.brinkervii.grapejuice.robloxplayer.desktop --set-icon="net.brinkervii.grapejuice.robloxplayer" --set-key="Exec" --set-value="grapejuice player %u"
-      # Edit Roblox Studio shortcut
-      - desktop-file-edit /app/share/applications/net.brinkervii.grapejuice.robloxstudio.desktop --set-icon="net.brinkervii.grapejuice.robloxstudio" --set-key="Exec" --set-value="grapejuice studio %u"
-      # Edit Roblox Studio authentication shortcut
-      - desktop-file-edit /app/share/applications/net.brinkervii.grapejuice.robloxstudioauth.desktop --set-icon="net.brinkervii.grapejuice.robloxstudio" --set-key="Exec" --set-value="grapejuice studio-auth %u"
+	- name: grapejuice
+	buildsystem: simple
+	build-commands:
+		# Install user_settings.json to preconfigure settings
+		- install -Dm644 user_settings.json /app
+		# Run Grapejuice packaging module
+		- PYTHONPATH=$(pwd)/src python3 -m grapejuice_packaging linux_package
+		- cp -r build/linux_package/usr/* /app
+		- mkdir -p /app/lib/python3.10/pip_deps
+		- mkdir /app/locales
+		- pip3 install $(pwd) --target=/app/lib/python3.10/pip_deps --no-deps --no-index
+		# Install Wine
+		- tar --use-compress-program=unzstd -xvf debuntu-wine-tkg-staging-fsync-git-7.1.r2.gc437a01e.tar.zst
+		- mv wine-tkg-staging-fsync-git-7.1.r2.gc437a01e /app/patched_wine
 
-      # Install Grapejuice icons
-      # 64x64 icons
-      - install -Dm644 src/grapejuice_common/assets/icons/hicolor/64x64/apps/grapejuice-roblox-player.png /app/share/icons/hicolor/64x64/apps/net.brinkervii.grapejuice.robloxplayer.png
-      - install -Dm644 src/grapejuice_common/assets/icons/hicolor/64x64/apps/grapejuice-roblox-studio.png /app/share/icons/hicolor/64x64/apps/net.brinkervii.grapejuice.robloxstudio.png
-      - install -Dm644 src/grapejuice_common/assets/icons/hicolor/64x64/apps/grapejuice-roblox-player.png /app/share/icons/hicolor/64x64/apps/net.brinkervii.grapejuice.robloxapp.png
-      - install -Dm644 src/grapejuice_common/assets/icons/hicolor/64x64/apps/grapejuice.png /app/share/icons/hicolor/64x64/apps/net.brinkervii.grapejuice.png
-      # 128x128 icons
-      - install -Dm644 src/grapejuice_common/assets/icons/hicolor/128x128/apps/grapejuice-roblox-player.png /app/share/icons/hicolor/128x128/apps/net.brinkervii.grapejuice.robloxplayer.png
-      - install -Dm644 src/grapejuice_common/assets/icons/hicolor/128x128/apps/grapejuice-roblox-studio.png /app/share/icons/hicolor/128x128/apps/net.brinkervii.grapejuice.robloxstudio.png
-      - install -Dm644 src/grapejuice_common/assets/icons/hicolor/128x128/apps/grapejuice-roblox-player.png /app/share/icons/hicolor/128x128/apps/net.brinkervii.grapejuice.robloxapp.png
-      - install -Dm644 src/grapejuice_common/assets/icons/hicolor/128x128/apps/grapejuice.png /app/share/icons/hicolor/128x128/apps/net.brinkervii.grapejuice.png
-      # Scalable/vector icons
-      - install -Dm644 src/grapejuice_common/assets/icons/hicolor/scalable/apps/grapejuice.svg /app/share/icons/hicolor/scalable/apps/net.brinkervii.grapejuice.svg
-      # Install AppStream data/metainfo
-      - install -Dm644 net.brinkervii.grapejuice.metainfo.xml -t /app/share/metainfo
-    sources:
-      - type: file
-        url: https://gitlab.com/brinkervii/wine-builds/-/raw/main/debuntu-wine-tkg-staging-fsync-git-7.1.r2.gc437a01e.tar.zst?inline=false
-        sha512: b60dd9628a592bef596049ff144ccdb7c2518afdbc70e32464f0d519122de4b2870ad8b7049f91acb876d302cde9189e899d54b615136d3bae1c0cc1bc2810da
-      - type: git
-        url: https://gitlab.com/brinkervii/grapejuice.git
-        tag: v7.2.1
-        commit: 80986fbecab5b867a71bd523062699d1cd86f7bb
-      - type: patch
-        path: patch_binaries.patch
-      - type: file
-        path: user_settings.json
-      - type: file
-        path: net.brinkervii.grapejuice.metainfo.xml
+		# Normal Grapejuice desktop entries aren't exported anyway, so there's no need to delete them.
+		# Install Grapejuice desktop entries
+		- install -Dm644 src/grapejuice_common/assets/desktop/grapejuice.desktop /app/share/applications/net.brinkervii.grapejuice.desktop
+		- install -Dm644 src/grapejuice_common/assets/desktop/roblox-app.desktop /app/share/applications/net.brinkervii.grapejuice.robloxapp.desktop
+		- install -Dm644 src/grapejuice_common/assets/desktop/roblox-player.desktop /app/share/applications/net.brinkervii.grapejuice.robloxplayer.desktop
+		- install -Dm644 src/grapejuice_common/assets/desktop/roblox-studio.desktop /app/share/applications/net.brinkervii.grapejuice.robloxstudio.desktop
+		- install -Dm644 src/grapejuice_common/assets/desktop/roblox-studio-auth.desktop /app/share/applications/net.brinkervii.grapejuice.robloxstudioauth.desktop
+		# Edit Grapejuice shortcut
+		- desktop-file-edit /app/share/applications/net.brinkervii.grapejuice.desktop --set-icon="net.brinkervii.grapejuice" --set-key="Exec" --set-value="grapejuice gui"
+		# Edit Roblox App shortcut
+		- desktop-file-edit /app/share/applications/net.brinkervii.grapejuice.robloxapp.desktop --set-icon="net.brinkervii.grapejuice.robloxapp" --set-key="Exec" --set-value="grapejuice app"
+		# Edit Roblox Player shortcut
+		- desktop-file-edit /app/share/applications/net.brinkervii.grapejuice.robloxplayer.desktop --set-icon="net.brinkervii.grapejuice.robloxplayer" --set-key="Exec" --set-value="grapejuice player %u"
+		# Edit Roblox Studio shortcut
+		- desktop-file-edit /app/share/applications/net.brinkervii.grapejuice.robloxstudio.desktop --set-icon="net.brinkervii.grapejuice.robloxstudio" --set-key="Exec" --set-value="grapejuice studio %u"
+		# Edit Roblox Studio authentication shortcut
+		- desktop-file-edit /app/share/applications/net.brinkervii.grapejuice.robloxstudioauth.desktop --set-icon="net.brinkervii.grapejuice.robloxstudio" --set-key="Exec" --set-value="grapejuice studio-auth %u"
+
+		# Install Grapejuice icons
+		# 64x64 icons
+		- install -Dm644 src/grapejuice_common/assets/icons/hicolor/64x64/apps/grapejuice-roblox-player.png /app/share/icons/hicolor/64x64/apps/net.brinkervii.grapejuice.robloxplayer.png
+		- install -Dm644 src/grapejuice_common/assets/icons/hicolor/64x64/apps/grapejuice-roblox-studio.png /app/share/icons/hicolor/64x64/apps/net.brinkervii.grapejuice.robloxstudio.png
+		- install -Dm644 src/grapejuice_common/assets/icons/hicolor/64x64/apps/grapejuice-roblox-player.png /app/share/icons/hicolor/64x64/apps/net.brinkervii.grapejuice.robloxapp.png
+		- install -Dm644 src/grapejuice_common/assets/icons/hicolor/64x64/apps/grapejuice.png /app/share/icons/hicolor/64x64/apps/net.brinkervii.grapejuice.png
+		# 128x128 icons
+		- install -Dm644 src/grapejuice_common/assets/icons/hicolor/128x128/apps/grapejuice-roblox-player.png /app/share/icons/hicolor/128x128/apps/net.brinkervii.grapejuice.robloxplayer.png
+		- install -Dm644 src/grapejuice_common/assets/icons/hicolor/128x128/apps/grapejuice-roblox-studio.png /app/share/icons/hicolor/128x128/apps/net.brinkervii.grapejuice.robloxstudio.png
+		- install -Dm644 src/grapejuice_common/assets/icons/hicolor/128x128/apps/grapejuice-roblox-player.png /app/share/icons/hicolor/128x128/apps/net.brinkervii.grapejuice.robloxapp.png
+		- install -Dm644 src/grapejuice_common/assets/icons/hicolor/128x128/apps/grapejuice.png /app/share/icons/hicolor/128x128/apps/net.brinkervii.grapejuice.png
+		# Scalable/vector icons
+		- install -Dm644 src/grapejuice_common/assets/icons/hicolor/scalable/apps/grapejuice.svg /app/share/icons/hicolor/scalable/apps/net.brinkervii.grapejuice.svg
+		# Install AppStream data/metainfo
+		- install -Dm644 net.brinkervii.grapejuice.metainfo.xml -t /app/share/metainfo
+	sources:
+		# - type: file
+		#  url: https://gitlab.com/brinkervii/wine-builds/-/raw/main/debuntu-wine-tkg-staging-fsync-git-7.1.r2.gc437a01e.tar.zst?inline=false
+		#  sha512: b60dd9628a592bef596049ff144ccdb7c2518afdbc70e32464f0d519122de4b2870ad8b7049f91acb876d302cde9189e899d54b615136d3bae1c0cc1bc2810da
+		# Replacing with reproducible custom wine-tkg build
+		- type: git
+		url: https://github.com/Frogging-Family/wine-tkg-git.git
+		tag: 7.6.r12.g51472395
+		commit: 302600e87d88c5420de8200da82e757734c6f1e1
+		- type: git
+		url: https://gitlab.com/brinkervii/grapejuice.git
+		tag: v7.2.1
+		commit: 80986fbecab5b867a71bd523062699d1cd86f7bb
+		- type: patch
+		path: patch_binaries.patch
+		- type: file
+		path: user_settings.json
+		- type: file
+		path: net.brinkervii.grapejuice.metainfo.xml
