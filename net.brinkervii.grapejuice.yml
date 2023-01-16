@@ -20,6 +20,12 @@ finish-args:
 
 add-extensions:
 
+   
+  org.winehq.Wine:
+  directory: /app/patched_wine
+  version: stable
+  add-ld-path: lib32
+
   org.freedesktop.Platform.Compat.i386:
   directory: lib/i386-linux-gnu
   version: '22.08'
@@ -70,11 +76,6 @@ modules:
         path: ld.so.conf
 
   - python3-requirements.yml
-
-  - org.winehq.Wine:
-      directory: /app/patched_wine
-      version: stable
-      add-ld-path: lib32
 
   - name: grapejuice
     buildsystem: simple
