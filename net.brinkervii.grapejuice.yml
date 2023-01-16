@@ -18,29 +18,27 @@ finish-args:
   - --allow=multiarch
   - --device=all # Necessary for controller support (important on Steam Deck)
 
-add-extensions:
-
-   
-  org.winehq.Wine:
-  directory: /app/patched_wine
-  version: stable
-  add-ld-path: lib32
-
+add-extensions:   
   org.freedesktop.Platform.Compat.i386:
-  directory: lib/i386-linux-gnu
-  version: '22.08'
+    directory: lib/i386-linux-gnu
+    version: '22.08'
 
   org.freedesktop.Platform.GL32:
-  directory: lib/i386-linux-gnu/GL
-  version: '1.4'
-  versions: 22.08;1.4
-  subdirectories: true
-  no-autodownload: true
-  autodelete: false
-  add-ld-path: lib
-  merge-dirs: vulkan/icd.d;glvnd/egl_vendor.d;OpenCL/vendors;lib/dri;lib/d3d;vulkan/explicit_layer.d;vulkan/implicit_layer.d
-  download-if: active-gl-driver
-  enable-if: active-gl-driver
+    directory: lib/i386-linux-gnu/GL
+    version: '1.4'
+    versions: 22.08;1.4
+    subdirectories: true
+    no-autodownload: true
+    autodelete: false
+    add-ld-path: lib
+    merge-dirs: vulkan/icd.d;glvnd/egl_vendor.d;OpenCL/vendors;lib/dri;lib/d3d;vulkan/explicit_layer.d;vulkan/implicit_layer.d
+    download-if: active-gl-driver
+    enable-if: active-gl-driver
+
+  org.winehq.Wine:
+    directory: app/patched_wine
+    version: stable
+    add-ld-path: lib32
 
 cleanup:
   # pygobject headers
