@@ -1,6 +1,8 @@
 app-id: net.brinkervii.grapejuice
 runtime: org.freedesktop.Platform
 runtime-version: '22.08'
+base: org.winehq.Wine
+base-version: stable-22.08
 sdk: org.freedesktop.Sdk
 command: grapejuice
 separate-locales: false
@@ -34,11 +36,6 @@ add-extensions:
     merge-dirs: vulkan/icd.d;glvnd/egl_vendor.d;OpenCL/vendors;lib/dri;lib/d3d;vulkan/explicit_layer.d;vulkan/implicit_layer.d
     download-if: active-gl-driver
     enable-if: active-gl-driver
-
-  org.winehq.Wine:
-    directory: patched_wine
-    add-ld-path: lib32
-    bundle: true
 
 cleanup:
   # pygobject headers
