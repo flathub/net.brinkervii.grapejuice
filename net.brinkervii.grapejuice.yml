@@ -36,7 +36,7 @@ add-extensions:
     enable-if: active-gl-driver
 
   org.winehq.Wine:
-    directory: /app/patched_wine
+    directory: app/patched_wine
     version: stable
     add-ld-path: lib32
     bundle: true
