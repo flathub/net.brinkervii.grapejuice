@@ -37,7 +37,6 @@ add-extensions:
 
   org.winehq.Wine:
     directory: patched_wine
-    version: stable
     add-ld-path: lib32
     bundle: true
 
