@@ -6,7 +6,7 @@
   "default_wine_home": "/app",
   "wineprefixes": [
     {
-      "id": "29ca43f8-451b-45b9-8be6-2b51181a961e",
+      "id": "00000000-ffff-45b9-8be6-2b51181a961e",
       "priority": 0,
       "name_on_disk": "player",
       "display_name": "Player",
@@ -16,7 +16,7 @@
       "use_mesa_gl_override": false,
       "enable_winedebug": false,
       "winedebug_string": "",
-      "roblox_renderer": "D3D11",
+      "roblox_renderer": "Vulkan",
       "env": {},
       "hints": [
         "player",
@@ -29,11 +29,11 @@
       },
       "third_party": {
         "fps_unlocker": false,
-        "dxvk": true
+        "dxvk": false
       }
     },
     {
-      "id": "66a23803-2c39-458a-b4f4-9f7fe29d9e21",
+      "id": "00000000-ffff-458a-b4f4-9f7fe29d9e21",
       "priority": 0,
       "name_on_disk": "studio",
       "display_name": "Studio",
@@ -43,7 +43,7 @@
       "use_mesa_gl_override": false,
       "enable_winedebug": false,
       "winedebug_string": "",
-      "roblox_renderer": "D3D11",
+      "roblox_renderer": "Vulkan",
       "env": {},
       "hints": [
         "studio"
