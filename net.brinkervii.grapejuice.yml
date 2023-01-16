@@ -66,28 +66,15 @@ modules:
       - mkdir -p /app/lib/i386-linux-gnu
       - install -Dm644 ld.so.conf -t /app/etc/
     sources:
-    - type: file
-      path: ld.so.conf
+      - type: file
+        path: ld.so.conf
 
-    - python3-requirements.yml
+  - python3-requirements.yml
 
-    - name: wine
-      buildsystem: simple
-      build-commands:
-      # place proton LFH patch in wine-tkg userpatches
-      # apply brinker_wine.patch to wine-tkg
-        - install -Dm644 0002-proton_LFH.mypatch wine-tkg-git/wine-tkg-git/wine-tkg-userpatches
-        - ./wine-tkg-git/wine-tkg-git/non-makepkg-build.sh
-
-      sources:
-        - type: git
-          url: https://github.com/Frogging-Family/wine-tkg-git.git
-          tag: 7.6.r12.g51472395
-          commit: 302600e87d88c5420de8200da82e757734c6f1e1
-        - type: file
-          path: 0002-proton_LFH.mypatch
-        - type: file
-          path: brinker_wine.patch
+  - org.winehq.Wine:
+      directory: /app/patched_wine
+      version: stable
+      add-ld-path: lib32
 
   - name: grapejuice
     buildsystem: simple
@@ -100,10 +87,6 @@ modules:
       - mkdir -p /app/lib/python3.10/pip_deps
       - mkdir /app/locales
       - pip3 install $(pwd) --target=/app/lib/python3.10/pip_deps --no-deps --no-index
-      # Install Wine
-      - mv -r /wine-tkg-git/wine-tkg-git/PKGBUILD/wine-tkg-git/non-makepkg-builds /app/patched_wine
-      #- tar --use-compress-program=unzstd -xvf debuntu-wine-tkg-staging-fsync-git-7.1.r2.gc437a01e.tar.zst
-      #- mv wine-tkg-staging-fsync-git-7.1.r2.gc437a01e /app/patched_wine
 
       # Normal Grapejuice desktop entries aren't exported anyway, so there's no need to delete them.
       # Install Grapejuice desktop entries
@@ -139,10 +122,6 @@ modules:
       # Install AppStream data/metainfo
       - install -Dm644 net.brinkervii.grapejuice.metainfo.xml -t /app/share/metainfo
     sources:
-      # - type: file
-      #  url: https://gitlab.com/brinkervii/wine-builds/-/raw/main/debuntu-wine-tkg-staging-fsync-git-7.1.r2.gc437a01e.tar.zst?inline=false
-      #  sha512: b60dd9628a592bef596049ff144ccdb7c2518afdbc70e32464f0d519122de4b2870ad8b7049f91acb876d302cde9189e899d54b615136d3bae1c0cc1bc2810da
-      # Replacing with reproducible custom wine-tkg build
       - type: git
         url: https://gitlab.com/brinkervii/grapejuice.git
         tag: v7.2.1
@@ -153,5 +132,3 @@ modules:
         path: user_settings.json
       - type: file
         path: net.brinkervii.grapejuice.metainfo.xml
-    cleanup:
-      - /wine-tkg-git
