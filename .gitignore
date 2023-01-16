@@ -1,6 +1,0 @@
-/.flatpak-builder
-build.sh
-.buildconfig
-/build-dir
-meson.build
-
