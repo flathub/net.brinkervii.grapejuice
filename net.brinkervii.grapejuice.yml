@@ -76,7 +76,7 @@ modules:
     buildsystem: simple
     build-commands:
       # Install user_settings.json to preconfigure settings
-      - install -Dm644 user_settings.json /app
+      - install -Dm644 user_settings.json /app/user_settings_newwine.json
       # Run Grapejuice packaging module
       - PYTHONPATH=$(pwd)/src python3 -m grapejuice_packaging linux_package
       - cp -r build/linux_package/usr/* /app
@@ -122,6 +122,8 @@ modules:
         url: https://gitlab.com/brinkervii/grapejuice.git
         tag: v7.2.1
         commit: 80986fbecab5b867a71bd523062699d1cd86f7bb
+      - type: patch
+        path: new_wine.patch
       - type: patch
         path: patch_binaries.patch
       - type: file
