@@ -1,0 +1,13 @@
+diff --git a/src/grapejuice_common/paths.py b/src/grapejuice_common/paths.py
+index f97156d..269a347 100644
+--- a/src/grapejuice_common/paths.py
++++ b/src/grapejuice_common/paths.py
+@@ -60,7 +60,7 @@ def grapejuice_configuration_directory() -> Path:
+ 
+ 
+ def grapejuice_user_settings() -> Path:
+-    return grapejuice_configuration_directory() / "user_settings.json"
++    return grapejuice_configuration_directory() / "user_settings_newwine.json"
+ 
+ 
+ def wineprefixes_directory() -> Path:

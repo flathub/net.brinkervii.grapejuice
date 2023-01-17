@@ -32,7 +32,8 @@
 				<p>A new release!</p>
 				<p>This version of Grapejuice brings:</p>
 				<ul>
-					<li>New studio icon</li>
+					<li>A new, reproducible wine build!</li>
+					<li>Improved Studio performance!</li>
 				</ul>
 			</description>
 		</release>
