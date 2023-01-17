@@ -43,7 +43,7 @@
       "use_mesa_gl_override": false,
       "enable_winedebug": false,
       "winedebug_string": "",
-      "roblox_renderer": "Vulkan",
+      "roblox_renderer": "D3D11",
       "env": {},
       "hints": [
         "studio"
