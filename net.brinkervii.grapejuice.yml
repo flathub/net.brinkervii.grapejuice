@@ -1,8 +1,8 @@
 app-id: net.brinkervii.grapejuice
 runtime: org.freedesktop.Platform
 runtime-version: '22.08'
-base: org.winehq.Wine
-base-version: stable-22.08
+#base: org.winehq.Wine
+#base-version: stable-22.08
 sdk: org.freedesktop.Sdk
 command: grapejuice
 separate-locales: false
@@ -71,6 +71,17 @@ modules:
         path: ld.so.conf
 
   - python3-requirements.yml
+  
+  - name: proton
+    make-args:
+      - PREFIX=/app/patched_wine
+    make-install-args:
+      - PREFIX=/app/patched_wine
+    sources:
+      - type: git
+        url: https://github.com/ValveSoftware/Proton.git
+        tag: 'proton_7.0-5'
+        commit: 175bc06a3fdca772f8ad1b4a1d8e42c736f4d0e6
 
   - name: grapejuice
     buildsystem: simple
