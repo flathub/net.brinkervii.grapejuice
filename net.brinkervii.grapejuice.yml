@@ -75,6 +75,8 @@ modules:
   - name: grapejuice
     buildsystem: simple
     build-commands:
+      # install proton
+      - mv -r GE-Proton7-47 /app
       # Install user_settings.json to preconfigure settings
       - install -Dm644 user_settings.json /app/user_settings_proton.json
       # Run Grapejuice packaging module
