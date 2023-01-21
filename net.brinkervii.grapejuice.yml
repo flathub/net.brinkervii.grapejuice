@@ -1,8 +1,6 @@
 app-id: net.brinkervii.grapejuice
 runtime: org.freedesktop.Platform
 runtime-version: '22.08'
-base: com.valvesoftware.Steam.CompatibilityTool.Proton
-base-version: beta
 sdk: org.freedesktop.Sdk
 command: grapejuice
 separate-locales: false
@@ -36,6 +34,10 @@ add-extensions:
     merge-dirs: vulkan/icd.d;glvnd/egl_vendor.d;OpenCL/vendors;lib/dri;lib/d3d;vulkan/explicit_layer.d;vulkan/implicit_layer.d
     download-if: active-gl-driver
     enable-if: active-gl-driver
+
+  com.valvesoftware.Steam.CompatibilityTool.Proton:
+    directory: proton
+    bundle: true
 
 cleanup:
   # pygobject headers
