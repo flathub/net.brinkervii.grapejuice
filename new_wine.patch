@@ -7,7 +7,7 @@ index f97156d..269a347 100644
  
  def grapejuice_user_settings() -> Path:
 -    return grapejuice_configuration_directory() / "user_settings.json"
-+    return grapejuice_configuration_directory() / "user_settings_newwine.json"
++    return grapejuice_configuration_directory() / "user_settings_proton.json"
  
  
  def wineprefixes_directory() -> Path:

@@ -1,8 +1,8 @@
 app-id: net.brinkervii.grapejuice
 runtime: org.freedesktop.Platform
 runtime-version: '22.08'
-base: org.winehq.Wine
-base-version: stable-22.08
+#base: org.winehq.Wine
+#base-version: stable-22.08
 sdk: org.freedesktop.Sdk
 command: grapejuice
 separate-locales: false
@@ -36,11 +36,6 @@ add-extensions:
     merge-dirs: vulkan/icd.d;glvnd/egl_vendor.d;OpenCL/vendors;lib/dri;lib/d3d;vulkan/explicit_layer.d;vulkan/implicit_layer.d
     download-if: active-gl-driver
     enable-if: active-gl-driver
-
-inherit-extensions:
-  - org.winehq.Wine.gecko
-  - org.winehq.Wine.mono
-  - org.winehq.Wine.DLLs
 
 cleanup:
   # pygobject headers
@@ -81,7 +76,7 @@ modules:
     buildsystem: simple
     build-commands:
       # Install user_settings.json to preconfigure settings
-      - install -Dm644 user_settings.json /app/user_settings_newwine.json
+      - install -Dm644 user_settings.json /app/user_settings_proton.json
       # Run Grapejuice packaging module
       - PYTHONPATH=$(pwd)/src python3 -m grapejuice_packaging linux_package
       - cp -r build/linux_package/usr/* /app
@@ -135,3 +130,8 @@ modules:
         path: user_settings.json
       - type: file
         path: net.brinkervii.grapejuice.metainfo.xml
+      # Jan212023: Install Proton-GE
+      # path is /app/GE-Proton7-47/files
+      - type: archive
+        url: https://github.com/GloriousEggroll/proton-ge-custom/releases/download/GE-Proton7-47/GE-Proton7-47.tar.gz
+        sha512: 29fbab0865ec4aaa472a6777b88f5378e166550cca8814f66c10d22b022367848ce4db895575f6792c375fb4bfbacb8e97900511b243531572d4f9f49fd9700f
