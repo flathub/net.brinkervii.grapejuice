@@ -36,7 +36,7 @@ add-extensions:
     enable-if: active-gl-driver
 
   com.valvesoftware.Steam.CompatibilityTool.Proton:
-    directory: proton
+    directory: Proton
     bundle: true
 
 cleanup:
@@ -77,6 +77,8 @@ modules:
   - name: grapejuice
     buildsystem: simple
     build-commands:
+      # add proton directory
+      - mkdir -p ${FLATPAK_DEST}/share/steam/compatibilitytools.d/
       # Install user_settings.json to preconfigure settings
       - install -Dm644 user_settings.json /app/user_settings_newwine.json
       # Run Grapejuice packaging module
