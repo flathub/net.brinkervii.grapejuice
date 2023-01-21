@@ -1,6 +1,8 @@
 app-id: net.brinkervii.grapejuice
 runtime: org.freedesktop.Platform
 runtime-version: '22.08'
+base: org.winehq.Wine
+base-version: stable-22.08
 sdk: org.freedesktop.Sdk
 command: grapejuice
 separate-locales: false
@@ -35,9 +37,10 @@ add-extensions:
     download-if: active-gl-driver
     enable-if: active-gl-driver
 
-  com.valvesoftware.Steam.CompatibilityTool.Proton:
-    directory: Proton
-    bundle: true
+inherit-extensions:
+  - org.winehq.Wine.gecko
+  - org.winehq.Wine.mono
+  - org.winehq.Wine.DLLs
 
 cleanup:
   # pygobject headers
@@ -77,8 +80,6 @@ modules:
   - name: grapejuice
     buildsystem: simple
     build-commands:
-      # add proton directory
-      - mkdir -p ${FLATPAK_DEST}/share/steam/compatibilitytools.d/
       # Install user_settings.json to preconfigure settings
       - install -Dm644 user_settings.json /app/user_settings_newwine.json
       # Run Grapejuice packaging module
