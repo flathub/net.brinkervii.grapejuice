@@ -136,4 +136,4 @@ modules:
       # path is /app/GE-Proton7-47/files
       - type: archive
         url: https://github.com/GloriousEggroll/wine-ge-custom/releases/download/GE-Proton7-35/wine-lutris-GE-Proton7-35-x86_64.tar.xz
-        sha512: 70e583cd54e0e003001936876e8a42c2aaa96c332332191e7cc2cc2755f7bb95b3940aeff10a940e1094071e15c879bbd6a38b971582fec39d1a5627267d028e  wine-lutris-GE-Proton7-35-x86_64.tar.xz
+        sha512: 70e583cd54e0e003001936876e8a42c2aaa96c332332191e7cc2cc2755f7bb95b3940aeff10a940e1094071e15c879bbd6a38b971582fec39d1a5627267d028e
