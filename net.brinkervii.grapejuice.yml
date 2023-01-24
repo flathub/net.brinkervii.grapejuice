@@ -76,7 +76,7 @@ modules:
     buildsystem: simple
     build-commands:
       # install proton
-      - tar -xf wine-lutris-GE-Proton7-35-x86_64.tar.xz wine-lutris-GE-Proton7-35-x86_64
+      - tar -xf wine-lutris-GE-Proton7-35-x86_64.tar.xz
       - mv wine-lutris-GE-Proton7-35-x86_64 /app/wine_ge
       # Install user_settings.json to preconfigure settings
       - install -Dm644 user_settings.json /app/user_settings_proton.json
