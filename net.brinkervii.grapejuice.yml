@@ -76,7 +76,7 @@ modules:
     buildsystem: simple
     build-commands:
       # install proton
-      - mv -r GE-Proton7-47 /app
+      - mv -r wine-lutris-GE-Proton7-35-x86_64 /app/wine_ge
       # Install user_settings.json to preconfigure settings
       - install -Dm644 user_settings.json /app/user_settings_proton.json
       # Run Grapejuice packaging module
@@ -135,5 +135,5 @@ modules:
       # Jan212023: Install Proton-GE
       # path is /app/GE-Proton7-47/files
       - type: archive
-        url: https://github.com/GloriousEggroll/proton-ge-custom/releases/download/GE-Proton7-47/GE-Proton7-47.tar.gz
-        sha512: 29fbab0865ec4aaa472a6777b88f5378e166550cca8814f66c10d22b022367848ce4db895575f6792c375fb4bfbacb8e97900511b243531572d4f9f49fd9700f
+        url: https://github.com/GloriousEggroll/wine-ge-custom/releases/download/GE-Proton7-35/wine-lutris-GE-Proton7-35-x86_64.tar.xz
+        sha512: 70e583cd54e0e003001936876e8a42c2aaa96c332332191e7cc2cc2755f7bb95b3940aeff10a940e1094071e15c879bbd6a38b971582fec39d1a5627267d028e  wine-lutris-GE-Proton7-35-x86_64.tar.xz

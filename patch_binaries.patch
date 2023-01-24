@@ -7,7 +7,7 @@ index bcf21c1..f6785c9 100644
 -
 -exec /usr/bin/env python3 -m grapejuice "$@"
 +mkdir -p /var/config/brinkervii/grapejuice/ 
-+cp -n /app/user_settings_proton.json /var/config/brinkervii/grapejuice/user_settings_proton.json
++cp -n /app/user_settings_wine_ge.json /var/config/brinkervii/grapejuice/user_settings_wine_ge.json
 +exec /usr/bin/env PYTHONPATH="${PYTHONPATH}:/app/lib/python3.10/pip_deps" GRAPEJUICE_LOCALE_DIRECTORY=/app/share/locale python3 -m grapejuice "$@"
 diff --git a/src/grapejuice_packaging/packaging_resources/bin/grapejuice-gui b/src/grapejuice_packaging/packaging_resources/bin/grapejuice-gui
 index 9a6ad30..2e19c4e 100644
@@ -18,5 +18,5 @@ index 9a6ad30..2e19c4e 100644
 -
 -exec /usr/bin/env python3 -m grapejuice gui "$@"
 +mkdir -p /var/config/brinkervii/grapejuice/ 
-+cp -n /app/user_settings_proton.json /var/config/brinkervii/grapejuice/user_settings_proton.json
++cp -n /app/user_settings_wine_ge.json /var/config/brinkervii/grapejuice/user_settings_wine_ge.json
 +exec /usr/bin/env PYTHONPATH="${PYTHONPATH}:/app/lib/python3.10/pip_deps" GRAPEJUICE_LOCALE_DIRECTORY=/app/share/locale python3 -m grapejuice gui "$@"
