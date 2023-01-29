@@ -120,8 +120,8 @@ modules:
     sources:
       - type: git
         url: https://gitlab.com/brinkervii/grapejuice.git
-        tag: v7.2.1
-        commit: 80986fbecab5b867a71bd523062699d1cd86f7bb
+        tag: v7.5.1
+        commit: d7577c65853c12ae6891ddb13988a8b8b486b0ee
       - type: patch
         path: new_wine.patch
       - type: patch
