@@ -131,14 +131,14 @@ modules:
         --prefix=${FLATPAK_DEST} "pydantic" --no-build-isolation
     sources:
       - type: file
-        url: https://files.pythonhosted.org/packages/53/17/34e54e352f6a3d304044e52d5ddd5cd621a62ec8fb7af08cc73af65dd3e1/pydantic-1.10.4.tar.gz
-        sha256: b9a3859f24eb4e097502a3be1fb4b2abb79b6103dd9e2e0edb70613a4459a648
+        url: https://files.pythonhosted.org/packages/28/59/5d2fc3499d9ce8ce48ee7e00f043d5cc429a9198bd96c3512809428ade15/pydantic-1.10.5.tar.gz
+        sha256: 9e337ac83686645a46db0e825acceea8e02fca4062483f40e9ae178e8bd1103a
         x-checker-data:
           name: pydantic
           type: pypi
       - type: file
-        url: https://files.pythonhosted.org/packages/0b/8e/f1a0a5a76cfef77e1eb6004cb49e5f8d72634da638420b9ea492ce8305e8/typing_extensions-4.4.0-py3-none-any.whl
-        sha256: 16fa4864408f655d35ec496218b85f79b3437c829e93320c7c9215ccfd92489e
+        url: https://files.pythonhosted.org/packages/31/25/5abcd82372d3d4a3932e1fa8c3dbf9efac10cc7c0d16e78467460571b404/typing_extensions-4.5.0-py3-none-any.whl
+        sha256: fb33085c39dd998ac16d1431ebc293a8b3eedd00fd4a32de0ff79002c19511b4
         x-checker-data:
           name: typing_extensions
           packagetype: bdist_wheel
