@@ -3,14 +3,14 @@
   "hardware_profile": null,
   "disable_updates": true,
   "try_profiling_hardware": false,
-  "default_wine_home": "/app",
+  "default_wine_home": "/app/patched_wine",
   "wineprefixes": [
     {
       "id": "00000000-ffff-45b9-8be6-2b51181a961e",
       "priority": 0,
       "name_on_disk": "player",
       "display_name": "Player",
-      "wine_home": "/app",
+      "wine_home": "/app/patched_wine",
       "dll_overrides": "dxdiagn=;winemenubuilder.exe=",
       "prime_offload_sink": -1,
       "use_mesa_gl_override": false,
@@ -29,7 +29,7 @@
       },
       "third_party": {
         "fps_unlocker": false,
-        "dxvk": false
+        "dxvk": true
       }
     },
     {
@@ -37,7 +37,7 @@
       "priority": 0,
       "name_on_disk": "studio",
       "display_name": "Studio",
-      "wine_home": "/app",
+      "wine_home": "/app/patched_wine",
       "dll_overrides": "dxdiagn=;winemenubuilder.exe=",
       "prime_offload_sink": -1,
       "use_mesa_gl_override": false,
