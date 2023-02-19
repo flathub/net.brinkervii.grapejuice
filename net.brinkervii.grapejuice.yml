@@ -76,11 +76,11 @@ modules:
       # Install user_settings.json to preconfigure settings
       - install -Dm644 user_settings.json /app/user_settings_brinkerwine.json
       # Run Grapejuice packaging module
+      - pip3 install $(pwd) --target=/app/lib/python3.10/pip_deps --no-deps --no-index
       - PYTHONPATH=$(pwd)/src python3 -m grapejuice_packaging linux_package
       - cp -r build/linux_package/usr/* /app
       - mkdir -p /app/lib/python3.10/pip_deps
       - mkdir /app/locales
-      - pip3 install $(pwd) --target=/app/lib/python3.10/pip_deps --no-deps --no-index
       
       # put brinkerwine back in...this is going to annihilate studio performance, but people want it
       - tar --use-compress-program=unzstd -xvf debuntu-wine-tkg-staging-fsync-git-7.1.r2.gc437a01e.tar.zst
