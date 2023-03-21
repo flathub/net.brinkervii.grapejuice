@@ -77,7 +77,7 @@ modules:
       - install -Dm644 user_settings.json /app/user_settings_brinkerwine.json
       # Run Grapejuice packaging module
       - PYTHONPATH=$(pwd)/src python3 -m grapejuice_packaging pypi_package 
-      - cp -r build/linux_package/usr/* /app
+      #- cp -r build/linux_package/usr/* /app
       - mkdir -p /app/lib/python3.10/pip_deps
       - mkdir /app/locales
       - pip3 install $(pwd) --target=/app/lib/python3.10/pip_deps --no-deps --no-index
