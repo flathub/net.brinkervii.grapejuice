@@ -124,6 +124,18 @@ modules:
           name: click
           packagetype: bdist_wheel
           type: pypi
+  - name: python3-setuptools
+    buildsystem: simple
+    build-commands:
+       - pip3 install --verbose --exists-action=i --no-index --find-links="file://${PWD}"
+         --prefix=${FLATPAK_DEST} "setuptools" --no-build-isolation
+    sources:
+       - type: file
+         url: https://files.pythonhosted.org/packages/c3/9e/8a7ba2c9984a060daa6c6f9fff4d576b7ace3936239d6b771541eab972ed/setuptools-67.6.0-py3-none-any.whl
+         sha256: b78aaa36f6b90a074c1fa651168723acbf45d14cb1196b6f02c0fd07f17623b2
+         x-checker-data:
+           name: setuptools
+           type: pypi
   - name: python3-pydantic
     buildsystem: simple
     build-commands:
