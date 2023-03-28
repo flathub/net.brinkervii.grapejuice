@@ -38,8 +38,8 @@ modules:
         --prefix=${FLATPAK_DEST} "PyGObject" --no-build-isolation
     sources:
       - type: file
-        url: https://files.pythonhosted.org/packages/07/73/a034fc1bcd6d402d6f72ff618c093f91ac6921f968cc19806b6a1b1b19c8/PyGObject-3.44.0.tar.gz
-        sha256: 34c21bdca7aeaa602980dc51c11bb31ec300753975a66d5d41cb67e619e6835b
+        url: https://files.pythonhosted.org/packages/44/80/96d6317a15a13a4f80ffa61118dc144a70756135fbc6ace30f9b033f51f7/PyGObject-3.44.1.tar.gz
+        sha256: 665fbe980c91e8b31ad78ed3f66879946948200864002d193f67eccc1d7d5d83
         x-checker-data:
           name: PyGObject
           type: pypi
