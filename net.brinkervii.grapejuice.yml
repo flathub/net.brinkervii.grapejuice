@@ -18,7 +18,7 @@ finish-args:
   - --allow=multiarch
   - --device=all # Necessary for controller support (important on Steam Deck)
 
-add-extensions:   
+add-extensions:
   org.freedesktop.Platform.Compat.i386:
     directory: lib/i386-linux-gnu
     version: '22.08'
@@ -75,6 +75,7 @@ modules:
     build-commands:
       # Install user_settings.json to preconfigure settings
       - install -Dm644 user_settings.json /app/user_settings_brinkerwine.json
+      - rm pyproject.toml
       # Run Grapejuice packaging module
       - PYTHONPATH=$(pwd)/src python3 -m grapejuice_packaging linux_package
       - cp -r build/linux_package/usr/* /app
@@ -122,8 +123,8 @@ modules:
     sources:
       - type: git
         url: https://gitlab.com/brinkervii/grapejuice.git
-        tag: v7.5.1
-        commit: d7577c65853c12ae6891ddb13988a8b8b486b0ee
+        tag: v7.8.3
+        commit: 605e381db171a07485a31edd38811be97618a614
       - type: patch
         path: brinker_wine.patch
       - type: patch
