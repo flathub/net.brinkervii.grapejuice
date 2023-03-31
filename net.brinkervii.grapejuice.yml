@@ -127,15 +127,24 @@ modules:
       - mv -v /app/share/applications/roblox-studio.desktop /app/share/applications/${FLATPAK_ID}.robloxstudio.desktop
       - mv -v /app/share/applications/roblox-studio-auth.desktop /app/share/applications/${FLATPAK_ID}.robloxstudioauth.desktop
       # Edit Grapejuice shortcut
-      - desktop-file-edit /app/share/applications/${FLATPAK_ID}.desktop --set-icon=${FLATPAK_ID} --set-key=Exec --set-value='grapejuice gui'
+      - desktop-file-edit /app/share/applications/${FLATPAK_ID}.desktop --set-icon=${FLATPAK_ID}
+        --set-key=Exec --set-value='grapejuice gui'
       # Edit Roblox App shortcut
-      - desktop-file-edit /app/share/applications/${FLATPAK_ID}.robloxapp.desktop --set-icon=${FLATPAK_ID}.robloxplayer --set-key=Exec --set-value='grapejuice app'
+      - desktop-file-edit /app/share/applications/${FLATPAK_ID}.robloxapp.desktop
+        --set-icon=${FLATPAK_ID}.robloxplayer --set-key=Exec --set-value='grapejuice
+        app'
       # Edit Roblox Player shortcut
-      - desktop-file-edit /app/share/applications/${FLATPAK_ID}.robloxplayer.desktop --set-icon=${FLATPAK_ID}.robloxplayer --set-key=Exec --set-value='grapejuice player %u'
+      - desktop-file-edit /app/share/applications/${FLATPAK_ID}.robloxplayer.desktop
+        --set-icon=${FLATPAK_ID}.robloxplayer --set-key=Exec --set-value='grapejuice
+        player %u'
       # Edit Roblox Studio shortcut
-      - desktop-file-edit /app/share/applications/${FLATPAK_ID}.robloxstudio.desktop --set-icon=${FLATPAK_ID}.robloxstudio --set-key=Exec --set-value='grapejuice studio %u'
+      - desktop-file-edit /app/share/applications/${FLATPAK_ID}.robloxstudio.desktop
+        --set-icon=${FLATPAK_ID}.robloxstudio --set-key=Exec --set-value='grapejuice
+        studio %u'
       # Edit Roblox Studio authentication shortcut
-      - desktop-file-edit /app/share/applications/${FLATPAK_ID}.robloxstudioauth.desktop --set-icon=${FLATPAK_ID}.robloxstudio --set-key=Exec --set-value='grapejuice studio-auth %u'
+      - desktop-file-edit /app/share/applications/${FLATPAK_ID}.robloxstudioauth.desktop
+        --set-icon=${FLATPAK_ID}.robloxstudio --set-key=Exec --set-value='grapejuice
+        studio-auth %u'
       # Rename Grapejuice icons
       - |
         for res in 16x16 24x24 32x32 48x48 64x64 128x128 256x256
@@ -151,5 +160,9 @@ modules:
         url: https://gitlab.com/brinkervii/grapejuice.git
         tag: v7.8.3
         commit: 605e381db171a07485a31edd38811be97618a614
+        x-data-checker:
+          is-main-source: true
+          type: git
+          tag-pattern: ^v([\d.]+)$
       - type: file
         path: net.brinkervii.grapejuice.metainfo.xml
