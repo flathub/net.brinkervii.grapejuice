@@ -16,6 +16,9 @@ finish-args:
   - --socket=pulseaudio
   - --allow=multiarch
   - --device=all # Necessary for controller support (important on Steam Deck)
+  - --env=GRAPEJUICE_LOCALE_DIRECTORY=/app/share/locale
+  - --env=PATH=/app/bin:/usr/bin:/app/patched_wine/bin
+  - --env=PYTHONPATH=/app/lib/python3/dist-packages
 
 add-extensions:
   org.freedesktop.Platform.Compat.i386:
@@ -107,8 +110,6 @@ modules:
   - name: grapejuice
     buildsystem: simple
     build-commands:
-      # Install user_settings.json to preconfigure settings
-      - install -Dm644 user_settings.json /app/user_settings_brinkerwine.json
       - rm pyproject.toml
       # Run Grapejuice packaging module
       - PYTHONPATH=$(pwd)/src python3 -m grapejuice_packaging linux_package
@@ -154,11 +155,5 @@ modules:
         url: https://gitlab.com/brinkervii/grapejuice.git
         tag: v7.8.3
         commit: 605e381db171a07485a31edd38811be97618a614
-      - type: patch
-        path: brinker_wine.patch
-      - type: patch
-        path: patch_binaries.patch
-      - type: file
-        path: user_settings.json
       - type: file
         path: net.brinkervii.grapejuice.metainfo.xml
