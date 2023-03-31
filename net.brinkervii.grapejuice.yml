@@ -78,6 +78,30 @@ modules:
         url: https://gitlab.com/brinkervii/wine-builds/-/raw/main/debuntu-wine-tkg-staging-fsync-git-7.1.r2.gc437a01e.tar.zst
         sha256: 0e5ce9215b5e03d2fe2df3f54e75409c19af5e831c91613203bb1a33f7236bc1
 
+  - name: glxinfo
+    buildsystem: meson
+    config-opts:
+      - --bindir=/app/mesa-demos
+      - -Dglut=disabled
+      - -Dwayland=disabled
+    post-install:
+      - mv -v /app/mesa-demos/glxinfo /app/bin
+    sources:
+      - type: archive
+        url: https://archive.mesa3d.org/demos/mesa-demos-9.0.0.tar.xz
+        sha256: 3046a3d26a7b051af7ebdd257a5f23bfeb160cad6ed952329cdff1e9f1ed496b
+        x-checker-data:
+          type: anitya
+          project-id: 16781
+          stable-only: true
+          url-template: https://archive.mesa3d.org/demos/mesa-demos-$version.tar.xz
+    cleanup:
+      - /include
+      - /mesa-demos
+      - /share/mesa-demos
+    modules:
+      - shared-modules/glu/glu-9.json
+
   - python3-requirements.yml
 
   - name: grapejuice
