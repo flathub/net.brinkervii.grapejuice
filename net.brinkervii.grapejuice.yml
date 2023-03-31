@@ -9,7 +9,6 @@ finish-args:
   - --share=network
   - --socket=x11 # Will be removed or replaced with fallback-x11 once Wine is improved
   - --share=ipc
-  - --socket=wayland
   # Original device setting before the controller problems were discovered
   # Note: Having this setting disabled causes very rare issues as seen in the helpdesk
   #- --device=dri # Uncomment if --device=all is removed/commented to fix graphics issues
