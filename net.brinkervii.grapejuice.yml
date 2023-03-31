@@ -112,44 +112,40 @@ modules:
     build-commands:
       - rm pyproject.toml
       # Run Grapejuice packaging module
-      - PYTHONPATH=$(pwd)/src python3 -m grapejuice_packaging linux_package
-      - cp -r build/linux_package/usr/* /app
-      - mkdir -p /app/lib/python3.10/pip_deps
-      - mkdir /app/locales
-      - pip3 install $(pwd) --target=/app/lib/python3.10/pip_deps --no-deps --no-index
-      # Normal Grapejuice desktop entries aren't exported anyway, so there's no need to delete them.
-      # Install Grapejuice desktop entries
-      - install -Dm644 src/grapejuice_common/assets/desktop/grapejuice.desktop /app/share/applications/net.brinkervii.grapejuice.desktop
-      - install -Dm644 src/grapejuice_common/assets/desktop/roblox-app.desktop /app/share/applications/net.brinkervii.grapejuice.robloxapp.desktop
-      - install -Dm644 src/grapejuice_common/assets/desktop/roblox-player.desktop /app/share/applications/net.brinkervii.grapejuice.robloxplayer.desktop
-      - install -Dm644 src/grapejuice_common/assets/desktop/roblox-studio.desktop /app/share/applications/net.brinkervii.grapejuice.robloxstudio.desktop
-      - install -Dm644 src/grapejuice_common/assets/desktop/roblox-studio-auth.desktop /app/share/applications/net.brinkervii.grapejuice.robloxstudioauth.desktop
-      # Edit Grapejuice shortcut
-      - desktop-file-edit /app/share/applications/net.brinkervii.grapejuice.desktop --set-icon="net.brinkervii.grapejuice" --set-key="Exec" --set-value="grapejuice gui"
-      # Edit Roblox App shortcut
-      - desktop-file-edit /app/share/applications/net.brinkervii.grapejuice.robloxapp.desktop --set-icon="net.brinkervii.grapejuice.robloxapp" --set-key="Exec" --set-value="grapejuice app"
-      # Edit Roblox Player shortcut
-      - desktop-file-edit /app/share/applications/net.brinkervii.grapejuice.robloxplayer.desktop --set-icon="net.brinkervii.grapejuice.robloxplayer" --set-key="Exec" --set-value="grapejuice player %u"
-      # Edit Roblox Studio shortcut
-      - desktop-file-edit /app/share/applications/net.brinkervii.grapejuice.robloxstudio.desktop --set-icon="net.brinkervii.grapejuice.robloxstudio" --set-key="Exec" --set-value="grapejuice studio %u"
-      # Edit Roblox Studio authentication shortcut
-      - desktop-file-edit /app/share/applications/net.brinkervii.grapejuice.robloxstudioauth.desktop --set-icon="net.brinkervii.grapejuice.robloxstudio" --set-key="Exec" --set-value="grapejuice studio-auth %u"
-
-      # Install Grapejuice icons
-      # 64x64 icons
-      - install -Dm644 src/grapejuice_common/assets/icons/hicolor/64x64/apps/grapejuice-roblox-player.png /app/share/icons/hicolor/64x64/apps/net.brinkervii.grapejuice.robloxplayer.png
-      - install -Dm644 src/grapejuice_common/assets/icons/hicolor/64x64/apps/grapejuice-roblox-studio.png /app/share/icons/hicolor/64x64/apps/net.brinkervii.grapejuice.robloxstudio.png
-      - install -Dm644 src/grapejuice_common/assets/icons/hicolor/64x64/apps/grapejuice-roblox-player.png /app/share/icons/hicolor/64x64/apps/net.brinkervii.grapejuice.robloxapp.png
-      - install -Dm644 src/grapejuice_common/assets/icons/hicolor/64x64/apps/grapejuice.png /app/share/icons/hicolor/64x64/apps/net.brinkervii.grapejuice.png
-      # 128x128 icons
-      - install -Dm644 src/grapejuice_common/assets/icons/hicolor/128x128/apps/grapejuice-roblox-player.png /app/share/icons/hicolor/128x128/apps/net.brinkervii.grapejuice.robloxplayer.png
-      - install -Dm644 src/grapejuice_common/assets/icons/hicolor/128x128/apps/grapejuice-roblox-studio.png /app/share/icons/hicolor/128x128/apps/net.brinkervii.grapejuice.robloxstudio.png
-      - install -Dm644 src/grapejuice_common/assets/icons/hicolor/128x128/apps/grapejuice-roblox-player.png /app/share/icons/hicolor/128x128/apps/net.brinkervii.grapejuice.robloxapp.png
-      - install -Dm644 src/grapejuice_common/assets/icons/hicolor/128x128/apps/grapejuice.png /app/share/icons/hicolor/128x128/apps/net.brinkervii.grapejuice.png
-      # Scalable/vector icons
-      - install -Dm644 src/grapejuice_common/assets/icons/hicolor/scalable/apps/grapejuice.svg /app/share/icons/hicolor/scalable/apps/net.brinkervii.grapejuice.svg
+      - PYTHONPATH="${PWD}/src" python3 -m grapejuice_packaging linux_package
+      # Extract the package into /app
+      - tar --strip-components 1 -xf "${PWD}/dist/linux_package/"*.tar.gz -C /app
       # Install AppStream data/metainfo
-      - install -Dm644 net.brinkervii.grapejuice.metainfo.xml -t /app/share/metainfo
+      - install -Dm644 "${FLATPAK_ID}.metainfo.xml" -t /app/share/metainfo
+    post-install:
+      # Rename MIME info file
+      - mv -v /app/share/mime/packages/x-grapejuice-roblox.xml /app/share/mime/packages/net.brinkervii.grapejuice.xml
+      # Rename Grapejuice desktop entries
+      - mv -v /app/share/applications/grapejuice.desktop /app/share/applications/${FLATPAK_ID}.desktop
+      - mv -v /app/share/applications/roblox-app.desktop /app/share/applications/${FLATPAK_ID}.robloxapp.desktop
+      - mv -v /app/share/applications/roblox-player.desktop /app/share/applications/${FLATPAK_ID}.robloxplayer.desktop
+      - mv -v /app/share/applications/roblox-studio.desktop /app/share/applications/${FLATPAK_ID}.robloxstudio.desktop
+      - mv -v /app/share/applications/roblox-studio-auth.desktop /app/share/applications/${FLATPAK_ID}.robloxstudioauth.desktop
+      # Edit Grapejuice shortcut
+      - desktop-file-edit /app/share/applications/${FLATPAK_ID}.desktop --set-icon=${FLATPAK_ID} --set-key=Exec --set-value='grapejuice gui'
+      # Edit Roblox App shortcut
+      - desktop-file-edit /app/share/applications/${FLATPAK_ID}.robloxapp.desktop --set-icon=${FLATPAK_ID}.robloxplayer --set-key=Exec --set-value='grapejuice app'
+      # Edit Roblox Player shortcut
+      - desktop-file-edit /app/share/applications/${FLATPAK_ID}.robloxplayer.desktop --set-icon=${FLATPAK_ID}.robloxplayer --set-key=Exec --set-value='grapejuice player %u'
+      # Edit Roblox Studio shortcut
+      - desktop-file-edit /app/share/applications/${FLATPAK_ID}.robloxstudio.desktop --set-icon=${FLATPAK_ID}.robloxstudio --set-key=Exec --set-value='grapejuice studio %u'
+      # Edit Roblox Studio authentication shortcut
+      - desktop-file-edit /app/share/applications/${FLATPAK_ID}.robloxstudioauth.desktop --set-icon=${FLATPAK_ID}.robloxstudio --set-key=Exec --set-value='grapejuice studio-auth %u'
+      # Rename Grapejuice icons
+      - |
+        for res in 16x16 24x24 32x32 48x48 64x64 128x128 256x256
+        do
+          mv -v /app/share/icons/hicolor/${res}/apps/grapejuice.png /app/share/icons/hicolor/${res}/apps/${FLATPAK_ID}.png
+          mv -v /app/share/icons/hicolor/${res}/apps/grapejuice-roblox-player.png /app/share/icons/hicolor/${res}/apps/${FLATPAK_ID}.robloxplayer.png
+          mv -v /app/share/icons/hicolor/${res}/apps/grapejuice-roblox-studio.png /app/share/icons/hicolor/${res}/apps/${FLATPAK_ID}.robloxstudio.png
+        done
+      # Scalable/vector icon
+      - mv -v /app/share/icons/hicolor/scalable/apps/grapejuice.svg /app/share/icons/hicolor/scalable/apps/${FLATPAK_ID}.png
     sources:
       - type: git
         url: https://gitlab.com/brinkervii/grapejuice.git
