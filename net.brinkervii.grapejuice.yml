@@ -114,6 +114,63 @@ modules:
     modules:
       - shared-modules/glu/glu-9.json
 
+  - name: winetricks
+    no-autogen: true
+    make-args:
+      - PREFIX=/app
+    make-install-args:
+      - PREFIX=/app
+    sources:
+      - type: archive
+        archive-type: tar-gzip
+        url: https://api.github.com/repos/Winetricks/winetricks/tarball/20230212
+        sha256: 01d81eaa9ba2d900df8eb7a2928688aa280a950d3f55e45528ccf319bd26f3ec
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/Winetricks/winetricks/releases/latest
+          version-query: .tag_name
+          url-query: .tarball_url
+          timestamp-query: .published_at
+    cleanup:
+      - /share
+    modules:
+      - name: cabextract
+        build-options:
+          strip: true
+        sources:
+          - type: archive
+            url: https://www.cabextract.org.uk/cabextract-1.11.tar.gz
+            sha256: b5546db1155e4c718ff3d4b278573604f30dd64c3c5bfd4657cd089b823a3ac6
+            x-checker-data:
+              type: anitya
+              project-id: 245
+              stable-only: true
+              url-template: https://www.cabextract.org.uk/cabextract-$version.tar.gz
+        cleanup:
+          - /man
+
+      - name: p7zip
+        no-autogen: true
+        make-args:
+          - DEST_HOME=/app
+          - 7z
+        make-install-args:
+          - DEST_HOME=/app
+        sources:
+          - type: archive
+            archive-type: tar-gzip
+            url: https://api.github.com/repos/p7zip-project/p7zip/tarball/v17.05
+            sha256: 8be694161a71b94d50bd0632d85266f32729e45b60f128a6891a0eeb8d354fe3
+            x-checker-data:
+              type: json
+              url: https://api.github.com/repos/p7zip-project/p7zip/releases/latest
+              version-query: .tag_name
+              url-query: .tarball_url
+              timestamp-query: .published_at
+        cleanup:
+          - /man
+          - /share
+
   - python3-requirements.yml
 
   - name: grapejuice
