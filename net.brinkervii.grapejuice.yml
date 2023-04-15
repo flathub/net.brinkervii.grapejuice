@@ -147,7 +147,7 @@ modules:
               stable-only: true
               url-template: https://www.cabextract.org.uk/cabextract-$version.tar.gz
         cleanup:
-          - /man
+          - /share/man
 
       - name: p7zip
         no-autogen: true
@@ -215,12 +215,12 @@ modules:
       - |
         for res in 16x16 24x24 32x32 48x48 64x64 128x128 256x256
         do
-          mv -v /app/share/icons/hicolor/${res}/apps/grapejuice.png /app/share/icons/hicolor/${res}/apps/${FLATPAK_ID}.png
-          mv -v /app/share/icons/hicolor/${res}/apps/grapejuice-roblox-player.png /app/share/icons/hicolor/${res}/apps/${FLATPAK_ID}.robloxplayer.png
-          mv -v /app/share/icons/hicolor/${res}/apps/grapejuice-roblox-studio.png /app/share/icons/hicolor/${res}/apps/${FLATPAK_ID}.robloxstudio.png
+          ln -rsv /app/share/icons/hicolor/${res}/apps/grapejuice.png -T /app/share/icons/hicolor/${res}/apps/${FLATPAK_ID}.png
+          ln -rsv /app/share/icons/hicolor/${res}/apps/grapejuice-roblox-player.png -T /app/share/icons/hicolor/${res}/apps/${FLATPAK_ID}.robloxplayer.png
+          ln -rsv /app/share/icons/hicolor/${res}/apps/grapejuice-roblox-studio.png -T /app/share/icons/hicolor/${res}/apps/${FLATPAK_ID}.robloxstudio.png
         done
       # Scalable/vector icon
-      - mv -v /app/share/icons/hicolor/scalable/apps/grapejuice.svg /app/share/icons/hicolor/scalable/apps/${FLATPAK_ID}.png
+      - ln -rsv /app/share/icons/hicolor/scalable/apps/grapejuice.svg -T /app/share/icons/hicolor/scalable/apps/${FLATPAK_ID}.png
     sources:
       - type: git
         url: https://gitlab.com/brinkervii/grapejuice.git
