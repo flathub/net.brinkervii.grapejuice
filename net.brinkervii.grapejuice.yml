@@ -224,8 +224,8 @@ modules:
     sources:
       - type: git
         url: https://gitlab.com/brinkervii/grapejuice.git
-        tag: v7.8.3
-        commit: 605e381db171a07485a31edd38811be97618a614
+        tag: v7.11.4
+        commit: 33595fccf58e598907e9907a171368a3b4f976b5
         x-data-checker:
           is-main-source: true
           type: git
