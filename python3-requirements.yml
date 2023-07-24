@@ -6,124 +6,13 @@
 build-commands: []
 buildsystem: simple
 modules:
-  - name: python3-setuptools_rust
-    buildsystem: simple
-    build-commands:
-      - pip3 install --verbose --exists-action=i --no-index --find-links="file://${PWD}"
-        --prefix=${FLATPAK_DEST} "setuptools_rust" --no-build-isolation
-    sources:
-      - type: file
-        url: https://files.pythonhosted.org/packages/6a/23/8146aad7d88f4fcb3a6218f41a60f6c2d4e3a72de72da1825dc7c8f7877c/semantic_version-2.10.0-py2.py3-none-any.whl
-        sha256: de78a3b8e0feda74cabc54aab2da702113e33ac9d9eb9d2389bcf1f58b7d9177
-        x-checker-data:
-          name: semantic_version
-          packagetype: bdist_wheel
-          type: pypi
-      - type: file
-        url: https://files.pythonhosted.org/packages/57/db/7cc20ad859bc2a6a0c60e497c4be19784a8d14ff8e53a6da6ee4a6edd500/setuptools_rust-1.6.0-py3-none-any.whl
-        sha256: e28ae09fb7167c44ab34434eb49279307d611547cb56cb9789955cdb54a1aed9
-        x-checker-data:
-          name: setuptools_rust
-          packagetype: bdist_wheel
-          type: pypi
-      - &id004
-        type: file
-        url: https://files.pythonhosted.org/packages/ec/6b/63cc3df74987c36fe26157ee12e09e8f9db4de771e0f3404263117e75b95/typing_extensions-4.7.1-py3-none-any.whl
-        sha256: 440d5dd3af93b060174bf433bccd69b0babc3b15b1a8dca43789fd7f61514b36
-        x-checker-data:
-          name: typing_extensions
-          packagetype: bdist_wheel
-          type: pypi
-  - name: python3-hatchling
-    buildsystem: simple
-    build-commands:
-      - pip3 install --verbose --exists-action=i --no-index --find-links="file://${PWD}"
-        --prefix=${FLATPAK_DEST} "hatchling" --no-build-isolation
-    sources:
-      - type: file
-        url: https://files.pythonhosted.org/packages/c2/70/79facbb595905df30e48f658182636edee901ebd8a324378700daf84c622/editables-0.4-py3-none-any.whl
-        sha256: dd430dcf41c78d1d68ebbb893e498b0a306b554be9e7cede73b1c876c6ddbc8d
-        x-checker-data:
-          name: editables
-          packagetype: bdist_wheel
-          type: pypi
-      - type: file
-        url: https://files.pythonhosted.org/packages/76/56/8ccca673e2c896931722f876bf040c0b6a7d8c1a128be60516a8a55bb27a/hatchling-1.18.0-py3-none-any.whl
-        sha256: b66dc254931ec42aa68b5febd1d342c58142cc5267b7ff3b12ba3fa5b4900c93
-        x-checker-data:
-          name: hatchling
-          packagetype: bdist_wheel
-          type: pypi
-      - &id003
-        type: file
-        url: https://files.pythonhosted.org/packages/ab/c3/57f0601a2d4fe15de7a553c00adbc901425661bf048f2a22dfc500caf121/packaging-23.1-py3-none-any.whl
-        sha256: 994793af429502c4ea2ebf6bf664629d07c1a9fe974af92966e4b8d2df7edc61
-        x-checker-data:
-          name: packaging
-          packagetype: bdist_wheel
-          type: pypi
-      - type: file
-        url: https://files.pythonhosted.org/packages/be/c8/551a803a6ebb174ec1c124e68b449b98a0961f0b737def601e3c1fbb4cfd/pathspec-0.11.1-py3-none-any.whl
-        sha256: d8af70af76652554bd134c22b3e8a1cc46ed7d91edcdd721ef1a0c51a84a5293
-        x-checker-data:
-          name: pathspec
-          packagetype: bdist_wheel
-          type: pypi
-      - type: file
-        url: https://files.pythonhosted.org/packages/51/32/4a79112b8b87b21450b066e102d6608907f4c885ed7b04c3fdb085d4d6ae/pluggy-1.2.0-py3-none-any.whl
-        sha256: c2fd55a7d7a3863cba1a013e4e2414658b1d07b6bc57b3919e0c63c9abb99849
-        x-checker-data:
-          name: pluggy
-          packagetype: bdist_wheel
-          type: pypi
-      - &id001
-        type: file
-        url: https://files.pythonhosted.org/packages/97/75/10a9ebee3fd790d20926a90a2547f0bf78f371b2f13aa822c759680ca7b9/tomli-2.0.1-py3-none-any.whl
-        sha256: 939de3e7a6161af0c887ef91b7d41a53e7c5a1ca976325f429cb46ea9bc30ecc
-        x-checker-data:
-          name: tomli
-          packagetype: bdist_wheel
-          type: pypi
-      - type: file
-        url: https://files.pythonhosted.org/packages/6e/12/449bcda9e2761ce26a732765d3c3fc4ceac2a1ed9e049d1faa30d5c1ec27/trove_classifiers-2023.7.6-py3-none-any.whl
-        sha256: b420d5aa048ee7c456233a49203f7d58d1736af4a6cde637657d78c13ab7969b
-        x-checker-data:
-          name: trove_classifiers
-          packagetype: bdist_wheel
-          type: pypi
-  - name: python3-maturin
-    buildsystem: simple
-    build-commands:
-      - pip3 install --verbose --exists-action=i --no-index --find-links="file://${PWD}"
-        --prefix=${FLATPAK_DEST} "maturin" --no-build-isolation
-    sources:
-      - type: file
-        url: https://files.pythonhosted.org/packages/7b/78/2814bc0e46a96861aab337fd0404e7937acdb4ce187da239224ab4560d35/maturin-1.1.0.tar.gz
-        sha256: 4650aeaa8debd004b55aae7afb75248cbd4d61cd7da2dcf4ead8b22b58cecae0
-        x-checker-data:
-          name: maturin
-          type: pypi
-      - *id001
-  - name: python3-toml
-    buildsystem: simple
-    build-commands:
-      - pip3 install --verbose --exists-action=i --no-index --find-links="file://${PWD}"
-        --prefix=${FLATPAK_DEST} "toml" --no-build-isolation
-    sources:
-      - type: file
-        url: https://files.pythonhosted.org/packages/44/6f/7120676b6d73228c96e17f1f794d8ab046fc910d781c8d151120c3f1569e/toml-0.10.2-py2.py3-none-any.whl
-        sha256: 806143ae5bfb6a3c6e736a764057db0e6a0e05e338b5630894a5f779cabb4f9b
-        x-checker-data:
-          name: toml
-          packagetype: bdist_wheel
-          type: pypi
   - name: python3-pycairo
     buildsystem: simple
     build-commands:
       - pip3 install --verbose --exists-action=i --no-index --find-links="file://${PWD}"
         --prefix=${FLATPAK_DEST} "pycairo" --no-build-isolation
     sources:
-      - &id002
+      - &id001
         type: file
         url: https://files.pythonhosted.org/packages/a2/dd/bc2c9ee9485308a29c18b1241329e677917af25c60b127857f0fb23d0c6e/pycairo-1.24.0.tar.gz
         sha256: 1444d52f1bb4cc79a4a0c0fe2ccec4bd78ff885ab01ebe1c0f637d8392bcafb6
@@ -154,14 +43,20 @@ modules:
         x-checker-data:
           name: PyGObject
           type: pypi
-      - *id002
+      - *id001
   - name: python3-packaging
     buildsystem: simple
     build-commands:
       - pip3 install --verbose --exists-action=i --no-index --find-links="file://${PWD}"
         --prefix=${FLATPAK_DEST} "packaging" --no-build-isolation
     sources:
-      - *id003
+      - type: file
+        url: https://files.pythonhosted.org/packages/ab/c3/57f0601a2d4fe15de7a553c00adbc901425661bf048f2a22dfc500caf121/packaging-23.1-py3-none-any.whl
+        sha256: 994793af429502c4ea2ebf6bf664629d07c1a9fe974af92966e4b8d2df7edc61
+        x-checker-data:
+          name: packaging
+          packagetype: bdist_wheel
+          type: pypi
   - name: python3-requests
     buildsystem: simple
     build-commands:
@@ -232,27 +127,19 @@ modules:
     buildsystem: simple
     build-commands:
       - pip3 install --verbose --exists-action=i --no-index --find-links="file://${PWD}"
-        --prefix=${FLATPAK_DEST} "pydantic" --no-build-isolation
+        --prefix=${FLATPAK_DEST} "pydantic==1.10.11" --no-build-isolation
     sources:
       - type: file
-        url: https://files.pythonhosted.org/packages/d8/f0/a2ee543a96cc624c35a9086f39b1ed2aa403c6d355dfe47a11ee5c64a164/annotated_types-0.5.0-py3-none-any.whl
-        sha256: 58da39888f92c276ad970249761ebea80ba544b77acddaa1a4d6cf78287d45fd
-        x-checker-data:
-          name: annotated_types
-          packagetype: bdist_wheel
-          type: pypi
-      - type: file
-        url: https://files.pythonhosted.org/packages/1f/1a/71b404f9acb44402f5b581ade106e9219d6d83824d50943e630fc0ca12e5/pydantic-2.0.3-py3-none-any.whl
-        sha256: 614eb3321eb600c81899a88fa9858b008e3c79e0d4f1b49ab1f516b4b0c27cfb
+        url: https://files.pythonhosted.org/packages/cf/01/e8a380dc6e92a76113f034c58c9ffdbd115753e9b944ddf5d2dbe862f248/pydantic-1.10.11.tar.gz
+        sha256: f66d479cf7eb331372c470614be6511eae96f1f120344c25f3f9bb59fb1b5528
         x-checker-data:
           name: pydantic
-          packagetype: bdist_wheel
           type: pypi
       - type: file
-        url: https://files.pythonhosted.org/packages/57/ea/edff47ad42857534f3abcc87472802b3181041f4e4fbeac988a5ecfcffae/pydantic_core-2.3.0.tar.gz
-        sha256: 5cfb5ac4e82c47d5dc25b209dd4c3989e284b80109f9e08b33c895080c424b4f
+        url: https://files.pythonhosted.org/packages/ec/6b/63cc3df74987c36fe26157ee12e09e8f9db4de771e0f3404263117e75b95/typing_extensions-4.7.1-py3-none-any.whl
+        sha256: 440d5dd3af93b060174bf433bccd69b0babc3b15b1a8dca43789fd7f61514b36
         x-checker-data:
-          name: pydantic_core
+          name: typing_extensions
+          packagetype: bdist_wheel
           type: pypi
-      - *id004
 name: python3-requirements
