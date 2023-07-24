@@ -1,11 +1,30 @@
 # To generate this file correctly using flatpak-pip-generator:
 # 1. Open 'requirements.txt', found in Grapejuice's root folder.
-# 2. Add 'pycairo' at the very top.
+# 2. Add 'pycairo' and 'maturin' at the very top.
 # 3. Save the file and run the command below:
 #    flatpak-pip-generator --checker-data --output python3-requirements --requirements-file requirements.txt --runtime org.freedesktop.Sdk//22.08 --yaml
 build-commands: []
 buildsystem: simple
 modules:
+  - name: python3-maturin
+    buildsystem: simple
+    build-commands:
+      - pip3 install --verbose --exists-action=i --no-index --find-links="file://${PWD}"
+        --prefix=${FLATPAK_DEST} "maturin" --no-build-isolation
+    sources:
+      - type: file
+        url: https://files.pythonhosted.org/packages/7b/78/2814bc0e46a96861aab337fd0404e7937acdb4ce187da239224ab4560d35/maturin-1.1.0.tar.gz
+        sha256: 4650aeaa8debd004b55aae7afb75248cbd4d61cd7da2dcf4ead8b22b58cecae0
+        x-checker-data:
+          name: maturin
+          type: pypi
+      - type: file
+        url: https://files.pythonhosted.org/packages/97/75/10a9ebee3fd790d20926a90a2547f0bf78f371b2f13aa822c759680ca7b9/tomli-2.0.1-py3-none-any.whl
+        sha256: 939de3e7a6161af0c887ef91b7d41a53e7c5a1ca976325f429cb46ea9bc30ecc
+        x-checker-data:
+          name: tomli
+          packagetype: bdist_wheel
+          type: pypi
   - name: python3-pycairo
     buildsystem: simple
     build-commands:
