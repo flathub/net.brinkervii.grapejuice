@@ -27,14 +27,13 @@
 		</screenshot>
 	</screenshots>
 	<releases>
-		<release version="7.8.3" date="2023-02-19">
+		<release version="7.8.11" date="2023-02-19">
 			<description>
 				<p>A new release!</p>
 				<p>This version of Grapejuice brings:</p>
 				<ul>
-					<li>Replaced the Sign into Studio button with an App button</li>
-					<li>Made logging more verbose in Winprefix creation/search functions</li>
-					<li>Reduce possible [REDACTED] spam in logs</li>
+					<li>Roblox is still broken. Sorry folks, blame their anti-cheat...</li>
+					<li>Bugfixes</li>
 				</ul>
 			</description>
 		</release>
