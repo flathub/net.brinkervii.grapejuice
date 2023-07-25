@@ -130,8 +130,8 @@ modules:
         --prefix=${FLATPAK_DEST} "pydantic==1.10.11" --no-build-isolation
     sources:
       - type: file
-        url: https://files.pythonhosted.org/packages/cf/01/e8a380dc6e92a76113f034c58c9ffdbd115753e9b944ddf5d2dbe862f248/pydantic-1.10.11.tar.gz
-        sha256: f66d479cf7eb331372c470614be6511eae96f1f120344c25f3f9bb59fb1b5528
+        url: https://files.pythonhosted.org/packages/0f/46/12689d28731c709890361af3414a9d0d04328043beb7c9fc4e4caa580b5c/pydantic-2.1.1.tar.gz
+        sha256: 22d63db5ce4831afd16e7c58b3192d3faf8f79154980d9397d9867254310ba4b
         x-checker-data:
           name: pydantic
           type: pypi
