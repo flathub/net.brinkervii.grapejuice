@@ -117,8 +117,8 @@ modules:
         --prefix=${FLATPAK_DEST} "Click" --no-build-isolation
     sources:
       - type: file
-        url: https://files.pythonhosted.org/packages/1a/70/e63223f8116931d365993d4a6b7ef653a4d920b41d03de7c59499962821f/click-8.1.6-py3-none-any.whl
-        sha256: fa244bb30b3b5ee2cae3da8f55c9e5e0c0e86093306301fb418eb9dc40fbded5
+        url: https://files.pythonhosted.org/packages/00/2e/d53fa4befbf2cfa713304affc7ca780ce4fc1fd8710527771b58311a3229/click-8.1.7-py3-none-any.whl
+        sha256: ae74fb96c20a0277a1d615f1e4d73c8414f5a98db8b799a7931d1582f3390c28
         x-checker-data:
           name: click
           packagetype: bdist_wheel
@@ -130,8 +130,8 @@ modules:
         --prefix=${FLATPAK_DEST} "pydantic==1.10.11" --no-build-isolation
     sources:
       - type: file
-        url: https://files.pythonhosted.org/packages/cf/01/e8a380dc6e92a76113f034c58c9ffdbd115753e9b944ddf5d2dbe862f248/pydantic-1.10.11.tar.gz
-        sha256: f66d479cf7eb331372c470614be6511eae96f1f120344c25f3f9bb59fb1b5528
+        url: https://files.pythonhosted.org/packages/61/d3/e707508ce5b2f3015ec50db40c51f9deb1d69538d496deba27a1704dec58/pydantic-2.2.1.tar.gz
+        sha256: 31b5cada74b2320999fb2577e6df80332a200ff92e7775a52448b6b036fce24a
         x-checker-data:
           name: pydantic
           type: pypi
