@@ -233,13 +233,14 @@ modules:
         done
       - cp /app/share/icons/hicolor/scalable/apps/grapejuice.svg /app/share/icons/hicolor/scalable/apps/${FLATPAK_ID}.png
     sources:
-      - type: git
-        url: https://gitlab.com/brinkervii/grapejuice.git
-        tag: v7.11.4
-        commit: 33595fccf58e598907e9907a171368a3b4f976b5
-        x-data-checker:
-          is-main-source: true
-          type: git
-          tag-pattern: ^v([\d.]+)$
+      - type: archive
+        url: https://gitlab.com/brinkervii/grapejuice/-/archive/v7.14.4/grapejuice-v7.14.4.tar.bz2
+        sha256: a365793e486224a72ab321e49457ec6c7f994620350d2c2489bd87a4b0c593c4
+        x-checker-data:
+          type: json
+          url: https://gitlab.com/api/v4/projects/brinkervii%2Fgrapejuice/releases/permalink/latest
+          version-query: .tag_name
+          url-query: .assets.sources[] | select(.url | endswith("/grapejuice-" + $version
+            + ".tar.bz2")) | .url
       - type: file
         path: net.brinkervii.grapejuice.metainfo.xml

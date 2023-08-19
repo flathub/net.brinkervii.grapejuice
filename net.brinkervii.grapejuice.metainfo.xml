@@ -27,13 +27,15 @@
 		</screenshot>
 	</screenshots>
 	<releases>
-		<release version="7.8.11" date="2023-02-19">
+		<release version="7.14.4" date="2023-08-17">
 			<description>
-				<p>A new release!</p>
-				<p>This version of Grapejuice brings:</p>
+				<p>NOTE: Roblox is still broken!</p>
+				<p>This version of Grapejuice adds a Roblox Release channel setting!</p>
+				<p>Aside that some minor bugs were fixed:</p>
 				<ul>
-					<li>Roblox is still broken. Sorry folks, blame their anti-cheat...</li>
-					<li>Bugfixes</li>
+					<li>Grapejuice now throws a real error when it can not fetch a version</li>
+					<li>The self-updater doesn't crash anymore. This broke after the virtualenv update</li>
+					<li>Removed the player warning dialog</li>
 				</ul>
 			</description>
 		</release>
