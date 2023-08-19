@@ -81,25 +81,25 @@ modules:
           /app/lib32
           /app/lib/i386-linux-gnu
 
-  # put brinkerwine back in...this is going to annihilate studio performance, but people want it
-  - name: wine-tkg
+  - name: wine
     buildsystem: simple
     build-commands:
+      # NOTE: Users might have manually modified their PATH variable, so for backwards compatibility,
+      #       please always install Wine to /app/patched_wine to avoid breaking the app unnecessarily.
       - mkdir -p /app/patched_wine
-      - tar -C /app/patched_wine -I unzstd --strip-components 2 -xvf wine-tkg.tar.zst
+      - tar -C /app/patched_wine --strip-components 1 -xvf wine.tar.xz
       - stat /app/patched_wine/bin/wine
     sources:
       - type: file
-        dest-filename: wine-tkg.tar.zst
-        url: https://gitlab.com/brinkervii/wine-builds/-/raw/main/debuntu-wine-tkg-staging-fsync-git-7.20.r1.gbd2608b1.tar.zst
-        sha256: 1ee4e5a4ebc13ea172b14fc2c8088ed83e5436641c0a6411aa38ed31dda68581
+        dest-filename: wine.tar.xz
+        url: https://github.com/Kron4ek/Wine-Builds/releases/download/8.13/wine-8.13-staging-amd64.tar.xz
+        sha256: 95971fd97c1ca6dab218b0db256905faabd88c641dc8c8fadde9f9d14f0ada08
         x-checker-data:
           type: json
-          url: https://gitlab.com/brinkervii/wine-builds/-/refs/main/logs_tree/?format=json&offset=0
-          version-query: last(.[] | select(.file_name | startswith("debuntu-wine-tkg-staging-fsync-git")))
-            | .file_name | capture("-git-(?<version>(.+?)).tar.zst$").version
-          url-query: last(.[] | select(.file_name | startswith("debuntu-wine-tkg-staging-fsync-git")))
-            | @uri "https://gitlab.com/brinkervii/wine-builds/-/raw/main/\(.file_name)"
+          url: https://api.github.com/repos/Kron4ek/Wine-Builds/releases
+          version-query: first(.[] | select(.tag_name | test("^[0-9]"))).tag_name
+          url-query: .[] | select(.tag_name == "" + $version + "") | .assets[] | select(.name
+            == "wine-" + $version + "-staging-amd64.tar.xz").browser_download_url
 
   - name: glxinfo
     buildsystem: meson
