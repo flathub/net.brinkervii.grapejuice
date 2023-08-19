@@ -2,8 +2,6 @@ app-id: net.brinkervii.grapejuice
 runtime: org.freedesktop.Platform
 runtime-version: '22.08'
 sdk: org.freedesktop.Sdk
-sdk-extensions:
-  - org.freedesktop.Sdk.Extension.rust-stable
 command: grapejuice
 separate-locales: false
 
@@ -185,7 +183,7 @@ modules:
           - /man
           - /share
 
-  - python3-requirements.yml
+  - python3-requirements.yaml
 
   - name: grapejuice
     buildsystem: simple

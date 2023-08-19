@@ -1,7 +1,8 @@
 # To generate this file correctly using flatpak-pip-generator:
 # 1. Open 'requirements.txt', found in Grapejuice's root folder.
-# 2. Add 'pycairo', 'hatchling', 'setuptools-rust', 'maturin', and 'toml' at the very top.
-# 3. Save the file and run the command below:
+# 2. Add 'pycairo' at the very top.
+# 3. Replace 'pydantic' by 'pydantic<2'.
+# 4. Save the file and run the command below:
 #    flatpak-pip-generator --checker-data --output python3-requirements --requirements-file requirements.txt --runtime org.freedesktop.Sdk//22.08 --yaml
 build-commands: []
 buildsystem: simple
@@ -117,8 +118,8 @@ modules:
         --prefix=${FLATPAK_DEST} "Click" --no-build-isolation
     sources:
       - type: file
-        url: https://files.pythonhosted.org/packages/1a/70/e63223f8116931d365993d4a6b7ef653a4d920b41d03de7c59499962821f/click-8.1.6-py3-none-any.whl
-        sha256: fa244bb30b3b5ee2cae3da8f55c9e5e0c0e86093306301fb418eb9dc40fbded5
+        url: https://files.pythonhosted.org/packages/00/2e/d53fa4befbf2cfa713304affc7ca780ce4fc1fd8710527771b58311a3229/click-8.1.7-py3-none-any.whl
+        sha256: ae74fb96c20a0277a1d615f1e4d73c8414f5a98db8b799a7931d1582f3390c28
         x-checker-data:
           name: click
           packagetype: bdist_wheel
@@ -127,14 +128,16 @@ modules:
     buildsystem: simple
     build-commands:
       - pip3 install --verbose --exists-action=i --no-index --find-links="file://${PWD}"
-        --prefix=${FLATPAK_DEST} "pydantic==1.10.11" --no-build-isolation
+        --prefix=${FLATPAK_DEST} "pydantic<2" --no-build-isolation
     sources:
       - type: file
-        url: https://files.pythonhosted.org/packages/cf/01/e8a380dc6e92a76113f034c58c9ffdbd115753e9b944ddf5d2dbe862f248/pydantic-1.10.11.tar.gz
-        sha256: f66d479cf7eb331372c470614be6511eae96f1f120344c25f3f9bb59fb1b5528
+        url: https://files.pythonhosted.org/packages/3b/9b/a7631bf35e55326fd74654fe6bd896478f47d65e97ca69e60ddb1b3823ee/pydantic-1.10.12.tar.gz
+        sha256: 0fe8a415cea8f340e7a9af9c54fc71a649b43e8ca3cc732986116b3cb135d303
         x-checker-data:
           name: pydantic
           type: pypi
+          versions:
+            <: '2'
       - type: file
         url: https://files.pythonhosted.org/packages/ec/6b/63cc3df74987c36fe26157ee12e09e8f9db4de771e0f3404263117e75b95/typing_extensions-4.7.1-py3-none-any.whl
         sha256: 440d5dd3af93b060174bf433bccd69b0babc3b15b1a8dca43789fd7f61514b36
