@@ -105,7 +105,10 @@ modules:
     buildsystem: meson
     config-opts:
       - --bindir=/app/mesa-demos
+      - -Degl=disabled
       - -Dglut=disabled
+      - -Dosmesa=disabled
+      - -Dvulkan=disabled
       - -Dwayland=disabled
     post-install:
       - mv -v /app/mesa-demos/glxinfo /app/bin
@@ -121,7 +124,7 @@ modules:
     cleanup:
       - /include
       - /mesa-demos
-      - /share/mesa-demos
+      - /share
     modules:
       - shared-modules/glu/glu-9.json
 
