@@ -2,8 +2,6 @@ app-id: net.brinkervii.grapejuice
 runtime: org.freedesktop.Platform
 runtime-version: '22.08'
 sdk: org.freedesktop.Sdk
-sdk-extensions:
-  - org.freedesktop.Sdk.Extension.rust-stable
 command: grapejuice
 separate-locales: false
 
@@ -26,6 +24,11 @@ add-extensions:
   org.freedesktop.Platform.Compat.i386:
     directory: lib/i386-linux-gnu
     version: '22.08'
+
+  org.freedesktop.Platform.Compat.i386.Debug:
+    directory: lib/debug/lib/i386-linux-gnu
+    version: '22.08'
+    no-autodownload: true
 
   org.freedesktop.Platform.GL32:
     directory: lib/i386-linux-gnu/GL
@@ -65,38 +68,45 @@ modules:
   - name: bundle-setup
     buildsystem: simple
     build-commands:
-      - mkdir -p /app/lib32
       - mkdir -p /app/lib/i386-linux-gnu
-      - install -Dm644 ld.so.conf -t /app/etc/
+      - mkdir -p /app/lib/debug/lib/i386-linux-gnu
+      - mkdir -p /app/lib/i386-linux-gnu/GL
+      - install -Dm644 ld.so.conf /app/etc/ld.so.conf
     sources:
-      - type: file
-        path: ld.so.conf
+      - type: inline
+        dest-filename: ld.so.conf
+        contents: |
+          /app/lib32
+          /app/lib/i386-linux-gnu
 
-  # put brinkerwine back in...this is going to annihilate studio performance, but people want it
-  - name: wine-tkg
+  - name: wine
     buildsystem: simple
     build-commands:
+      # NOTE: Users might have manually modified their PATH variable, so for backwards compatibility,
+      #       please always install Wine to /app/patched_wine to avoid breaking the app unnecessarily.
       - mkdir -p /app/patched_wine
-      - tar -C /app/patched_wine -I unzstd --strip-components 2 -xvf wine-tkg.tar.zst
+      - tar -C /app/patched_wine --strip-components 1 -xvf wine.tar.xz
       - stat /app/patched_wine/bin/wine
     sources:
       - type: file
-        dest-filename: wine-tkg.tar.zst
-        url: https://gitlab.com/brinkervii/wine-builds/-/raw/main/debuntu-wine-tkg-staging-fsync-git-7.20.r1.gbd2608b1.tar.zst
-        sha256: 1ee4e5a4ebc13ea172b14fc2c8088ed83e5436641c0a6411aa38ed31dda68581
+        dest-filename: wine.tar.xz
+        url: https://github.com/Kron4ek/Wine-Builds/releases/download/8.13/wine-8.13-staging-amd64.tar.xz
+        sha256: 95971fd97c1ca6dab218b0db256905faabd88c641dc8c8fadde9f9d14f0ada08
         x-checker-data:
           type: json
-          url: https://gitlab.com/brinkervii/wine-builds/-/refs/main/logs_tree/?format=json&offset=0
-          version-query: last(.[] | select(.file_name | startswith("debuntu-wine-tkg-staging-fsync-git")))
-            | .file_name | capture("-git-(?<version>(.+?)).tar.zst$").version
-          url-query: last(.[] | select(.file_name | startswith("debuntu-wine-tkg-staging-fsync-git")))
-            | @uri "https://gitlab.com/brinkervii/wine-builds/-/raw/main/\(.file_name)"
+          url: https://api.github.com/repos/Kron4ek/Wine-Builds/releases
+          version-query: first(.[] | select(.tag_name | test("^[0-9]"))).tag_name
+          url-query: .[] | select(.tag_name == "" + $version + "") | .assets[] | select(.name
+            == "wine-" + $version + "-staging-amd64.tar.xz").browser_download_url
 
   - name: glxinfo
     buildsystem: meson
     config-opts:
       - --bindir=/app/mesa-demos
+      - -Degl=disabled
       - -Dglut=disabled
+      - -Dosmesa=disabled
+      - -Dvulkan=disabled
       - -Dwayland=disabled
     post-install:
       - mv -v /app/mesa-demos/glxinfo /app/bin
@@ -112,7 +122,7 @@ modules:
     cleanup:
       - /include
       - /mesa-demos
-      - /share/mesa-demos
+      - /share
     modules:
       - shared-modules/glu/glu-9.json
 
@@ -173,7 +183,7 @@ modules:
           - /man
           - /share
 
-  - python3-requirements.yml
+  - python3-requirements.yaml
 
   - name: grapejuice
     buildsystem: simple
@@ -213,24 +223,24 @@ modules:
       - desktop-file-edit /app/share/applications/${FLATPAK_ID}.robloxstudioauth.desktop
         --set-icon=${FLATPAK_ID}.robloxstudio --set-key=Exec --set-value='grapejuice
         studio-auth %u'
-      # Rename Grapejuice icons
+      # Copy and rename Grapejuice icons so they can be properly exported by flatpak-builder.
       - |
         for res in 16x16 24x24 32x32 48x48 64x64 128x128 256x256
         do
-          ln -rsv /app/share/icons/hicolor/${res}/apps/grapejuice.png -T /app/share/icons/hicolor/${res}/apps/${FLATPAK_ID}.png
-          ln -rsv /app/share/icons/hicolor/${res}/apps/grapejuice-roblox-player.png -T /app/share/icons/hicolor/${res}/apps/${FLATPAK_ID}.robloxplayer.png
-          ln -rsv /app/share/icons/hicolor/${res}/apps/grapejuice-roblox-studio.png -T /app/share/icons/hicolor/${res}/apps/${FLATPAK_ID}.robloxstudio.png
+          cp /app/share/icons/hicolor/${res}/apps/grapejuice.png /app/share/icons/hicolor/${res}/apps/${FLATPAK_ID}.png
+          cp /app/share/icons/hicolor/${res}/apps/grapejuice-roblox-player.png /app/share/icons/hicolor/${res}/apps/${FLATPAK_ID}.robloxplayer.png
+          cp /app/share/icons/hicolor/${res}/apps/grapejuice-roblox-studio.png /app/share/icons/hicolor/${res}/apps/${FLATPAK_ID}.robloxstudio.png
         done
-      # Scalable/vector icon
-      - ln -rsv /app/share/icons/hicolor/scalable/apps/grapejuice.svg -T /app/share/icons/hicolor/scalable/apps/${FLATPAK_ID}.png
+      - cp /app/share/icons/hicolor/scalable/apps/grapejuice.svg /app/share/icons/hicolor/scalable/apps/${FLATPAK_ID}.png
     sources:
-      - type: git
-        url: https://gitlab.com/brinkervii/grapejuice.git
-        tag: v7.11.4
-        commit: 33595fccf58e598907e9907a171368a3b4f976b5
-        x-data-checker:
-          is-main-source: true
-          type: git
-          tag-pattern: ^v([\d.]+)$
+      - type: archive
+        url: https://gitlab.com/brinkervii/grapejuice/-/archive/v7.14.4/grapejuice-v7.14.4.tar.bz2
+        sha256: a365793e486224a72ab321e49457ec6c7f994620350d2c2489bd87a4b0c593c4
+        x-checker-data:
+          type: json
+          url: https://gitlab.com/api/v4/projects/brinkervii%2Fgrapejuice/releases/permalink/latest
+          version-query: .tag_name
+          url-query: .assets.sources[] | select(.url | endswith("/grapejuice-" + $version
+            + ".tar.bz2")) | .url
       - type: file
         path: net.brinkervii.grapejuice.metainfo.xml
