@@ -234,8 +234,8 @@ modules:
       - cp /app/share/icons/hicolor/scalable/apps/grapejuice.svg /app/share/icons/hicolor/scalable/apps/${FLATPAK_ID}.png
     sources:
       - type: archive
-        url: https://gitlab.com/brinkervii/grapejuice/-/archive/v7.19.8/grapejuice-v7.19.8.tar.bz2
-        sha256: 07e4c5b6cc02dc9d3a8dc5c0069154ca3dfa91f29666a35a7bfed8524097ad16
+        url: https://gitlab.com/brinkervii/grapejuice/-/archive/v7.19.11/grapejuice-v7.19.11.tar.bz2
+        sha256: 72874a5065aea7e61429041b6c8d1bff65895b1bb4b617a135f7159d6f020388
         x-checker-data:
           type: json
           url: https://gitlab.com/api/v4/projects/brinkervii%2Fgrapejuice/releases/permalink/latest
