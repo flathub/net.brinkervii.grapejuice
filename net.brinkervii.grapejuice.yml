@@ -90,8 +90,8 @@ modules:
     sources:
       - type: file
         dest-filename: wine.tar.xz
-        url: https://github.com/Kron4ek/Wine-Builds/releases/download/8.15/wine-8.15-staging-amd64.tar.xz
-        sha256: 0cc40bb91591f01ac1ed0ac410e7c3112f348ce3951f4a49be84c5501b44e012
+        url: https://github.com/Kron4ek/Wine-Builds/releases/download/8.13/wine-8.13-staging-amd64.tar.xz
+        sha256:  95971fd97c1ca6dab218b0db256905faabd88c641dc8c8fadde9f9d14f0ada08 
         x-checker-data:
           type: json
           url: https://api.github.com/repos/Kron4ek/Wine-Builds/releases
@@ -234,8 +234,8 @@ modules:
       - cp /app/share/icons/hicolor/scalable/apps/grapejuice.svg /app/share/icons/hicolor/scalable/apps/${FLATPAK_ID}.png
     sources:
       - type: archive
-        url: https://gitlab.com/brinkervii/grapejuice/-/archive/v7.19.8/grapejuice-v7.19.8.tar.bz2
-        sha256: 07e4c5b6cc02dc9d3a8dc5c0069154ca3dfa91f29666a35a7bfed8524097ad16
+        url: https://gitlab.com/brinkervii/grapejuice/-/archive/v7.14.4/grapejuice-v7.19.8.tar.bz2
+        sha256: a365793e486224a72ab321e49457ec6c7f994620350d2c2489bd87a4b0c593c4
         x-checker-data:
           type: json
           url: https://gitlab.com/api/v4/projects/brinkervii%2Fgrapejuice/releases/permalink/latest
