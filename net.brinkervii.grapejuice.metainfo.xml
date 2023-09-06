@@ -27,6 +27,7 @@
 		</screenshot>
 	</screenshots>
 	<releases>
+		<release version="v7.20.11" date="2023-09-05"/>
 		<release version="v7.19.8" date="2023-09-04">
 			<description>
 				<p>Update to 7.19.8, see Grapejuice gitlab for update information</p>
