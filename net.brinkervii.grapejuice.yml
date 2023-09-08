@@ -239,8 +239,8 @@ modules:
         x-checker-data:
           type: json
           url: https://gitlab.com/api/v4/projects/brinkervii%2Fgrapejuice/releases/permalink/latest
-          version-query: .tag_name
-          url-query: .assets.sources[] | select(.url | endswith("/grapejuice-" + $version
-            + ".tar.bz2")) | .url
+          version-query: .tag_name | sub("^v"; "")
+          url-query: .assets.sources[] | select(.url | endswith("/grapejuice-v" +
+            $version + ".tar.bz2")) | .url
       - type: file
         path: net.brinkervii.grapejuice.metainfo.xml
