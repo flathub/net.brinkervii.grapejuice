@@ -90,8 +90,8 @@ modules:
     sources:
       - type: file
         dest-filename: wine.tar.xz
-        url: https://github.com/Kron4ek/Wine-Builds/releases/download/8.15/wine-8.15-staging-amd64.tar.xz
-        sha256: 0cc40bb91591f01ac1ed0ac410e7c3112f348ce3951f4a49be84c5501b44e012
+        url: https://github.com/Kron4ek/Wine-Builds/releases/download/8.17/wine-8.17-staging-amd64.tar.xz
+        sha256: ba41ecda5de3b00cedd79da652d2c5d1f2f7e537cef7c02d4999decd847bacf9
         x-checker-data:
           type: json
           url: https://api.github.com/repos/Kron4ek/Wine-Builds/releases
