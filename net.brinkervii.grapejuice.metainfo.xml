@@ -27,6 +27,7 @@
 		</screenshot>
 	</screenshots>
 	<releases>
+		<release version="7.20.12" date="2023-10-14"/>
 		<release version="7.20.11" date="2023-09-05">
 			<url>https://gitlab.com/brinkervii/grapejuice/-/releases/v7.20.11</url>
 		</release>
