@@ -85,7 +85,8 @@ modules:
       # NOTE: Users might have manually modified their PATH variable, so for backwards compatibility,
       #       please always install Wine to /app/patched_wine to avoid breaking the app unnecessarily.
       - mkdir -p /app/patched_wine
-      - tar -C /app/patched_wine --strip-components 1 --use-compress-program=unzstd -xvf wine.tar.zst
+      - tar -C /app/patched_wine --strip-components 1 --use-compress-program=unzstd
+        -xvf wine.tar.zst
       - stat /app/patched_wine/bin/wine
     sources:
       - type: file
@@ -234,8 +235,8 @@ modules:
       - cp /app/share/icons/hicolor/scalable/apps/grapejuice.svg /app/share/icons/hicolor/scalable/apps/${FLATPAK_ID}.png
     sources:
       - type: archive
-        url: https://gitlab.com/brinkervii/grapejuice/-/archive/v7.20.11/grapejuice-v7.20.11.tar.bz2
-        sha256: 3046f3239f0e512e1e7cafd6769f44574e6ed2dccf65a72c98e86e569f5b8ed3
+        url: https://gitlab.com/brinkervii/grapejuice/-/archive/v7.20.12/grapejuice-v7.20.12.tar.bz2
+        sha256: 0070a9b6162b7cb90ef2464bd598fbe2ab911052fdc2a439c42c18c833194452
         x-checker-data:
           type: json
           url: https://gitlab.com/api/v4/projects/brinkervii%2Fgrapejuice/releases/permalink/latest
