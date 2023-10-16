@@ -42,27 +42,6 @@ modules:
       - /share/man
       - /bin/xkeystone
 
-  - name: wine
-    buildsystem: simple
-    build-commands:
-      # NOTE: Users might have manually modified their PATH variable, so for backwards compatibility,
-      #       please always install Wine to /app/patched_wine to avoid breaking the app unnecessarily.
-      - mkdir -p /app/patched_wine
-      - tar -C /app/patched_wine --strip-components 1 --use-compress-program=unzstd
-        -xvf wine.tar.zst
-      - stat /app/patched_wine/bin/wine
-    sources:
-      - type: file
-        dest-filename: wine.tar.zst
-        url: https://gitlab.com/brinkervii/wine-builds/-/raw/main/debuntu-wine-tkg-staging-fsync-git-8.17.1.r8.g5d9b555b.tar.zst
-        sha256: db4c009aac59ca856a10c08c0bc9c986b82491201088f0ad9156cb7afe4895ea
-        #x-checker-data:
-        #  type: json
-        #  url: https://api.github.com/repos/Kron4ek/Wine-Builds/releases
-        #  version-query: first(.[] | select(.tag_name | test("^[0-9]"))).tag_name
-        #  url-query: .[] | select(.tag_name == "" + $version + "") | .assets[] | select(.name
-        #    == "wine-" + $version + "-staging-amd64.tar.xz").browser_download_url
-
   - name: glxinfo
     buildsystem: meson
     config-opts:
