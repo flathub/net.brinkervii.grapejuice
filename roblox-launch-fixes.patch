@@ -1,0 +1,97 @@
+diff --git a/src/grapejuice_common/assets/desktop/roblox-studio-auth.desktop b/src/grapejuice_common/assets/desktop/roblox-studio-auth.desktop
+index fb1c294..6fc2c0f 100644
+--- a/src/grapejuice_common/assets/desktop/roblox-studio-auth.desktop
++++ b/src/grapejuice_common/assets/desktop/roblox-studio-auth.desktop
+@@ -7,5 +7,5 @@ NoDisplay=true
+ Icon=$STUDIO_ICON
+ Exec=$GRAPEJUICE_EXECUTABLE studio-auth %u
+ Categories=Development;
+-StartupWMClass=RobloxStudioLauncherBeta.exe
++StartupWMClass=RobloxStudioBeta.exe
+ MimeType=x-scheme-handler/roblox-studio-auth;
+diff --git a/src/grapejuice_common/assets/desktop/roblox-studio.desktop b/src/grapejuice_common/assets/desktop/roblox-studio.desktop
+index 498cfa9..bb39ea7 100644
+--- a/src/grapejuice_common/assets/desktop/roblox-studio.desktop
++++ b/src/grapejuice_common/assets/desktop/roblox-studio.desktop
+@@ -6,5 +6,5 @@ Comment=Create Roblox Experiences
+ Icon=$STUDIO_ICON
+ Exec=$GRAPEJUICE_EXECUTABLE studio %u
+ Categories=Development;
+-StartupWMClass=RobloxStudioLauncherBeta.exe
++StartupWMClass=RobloxStudioBeta.exe
+ MimeType=x-scheme-handler/roblox-studio;application/x-roblox-rbxl;application/x-roblox-rbxlx
+diff --git a/src/grapejuice_common/wine/wineprefix_roblox.py b/src/grapejuice_common/wine/wineprefix_roblox.py
+index fade471..1bf48b0 100644
+--- a/src/grapejuice_common/wine/wineprefix_roblox.py
++++ b/src/grapejuice_common/wine/wineprefix_roblox.py
+@@ -45,7 +45,7 @@ class WineprefixRoblox:
+         self._configuration = configuration
+ 
+     def download_installer(self):
+-        path = self.current_player_version_path / "RobloxPlayerLauncher.exe"
++        path = self.current_player_version_path / "RobloxPlayerInstaller.exe"
+ 
+         path.parent.mkdir(parents=True, exist_ok=True)
+ 
+@@ -117,7 +117,7 @@ class WineprefixRoblox:
+ 
+     @property
+     def roblox_studio_launcher_path(self) -> Path:
+-        return self.locate_roblox_executable("RobloxStudioLauncherBeta.exe")
++        return self.locate_roblox_executable("RobloxStudioInstaller.exe")
+ 
+     @property
+     def roblox_studio_executable_path(self) -> Path:
+@@ -125,7 +125,7 @@ class WineprefixRoblox:
+ 
+     @property
+     def roblox_player_launcher_path(self) -> Path:
+-        return self.locate_roblox_executable("RobloxPlayerLauncher.exe")
++        return self.locate_roblox_executable("RobloxPlayerBeta.exe")
+ 
+     @property
+     def fast_flag_dump_path(self) -> Path:
+@@ -170,7 +170,7 @@ class WineprefixRoblox:
+ 
+     @property
+     def current_studio_version_settings_path(self):
+-        return _app_settings_path(self.current_studio_version_path / "RobloxPlayerBeta.exe")
++        return _app_settings_path(self.current_studio_version_path / "RobloxStudioBeta.exe")
+ 
+     @property
+     def roblox_studio_app_settings_path(self) -> Path:
+@@ -189,7 +189,7 @@ class WineprefixRoblox:
+ 
+     @property
+     def all_player_app_settings_paths(self) -> List[Path]:
+-        ls = list(map(_app_settings_path, self.locate_all_roblox_executables("RobloxPlayerLauncher.exe")))
++        ls = list(map(_app_settings_path, self.locate_all_roblox_executables("RobloxPlayerBeta.exe")))
+         ls.append(self.current_player_version_settings_path)
+ 
+         return list(set(ls))
+@@ -197,7 +197,7 @@ class WineprefixRoblox:
+     @property
+     def is_installed(self) -> bool:
+         try:
+-            self.locate_roblox_executable("RobloxPlayerLauncher.exe")
++            self.locate_roblox_executable("RobloxPlayerBeta.exe")
+             return True
+ 
+         except RobloxExecutableNotFound:
+@@ -275,14 +275,13 @@ class WineprefixRoblox:
+         self._core_control.run_exe(player_launcher_path, uri, accelerate_graphics=True)
+ 
+     def launch_app(self):
+-        player_executable_path = self.locate_roblox_executable("RobloxPlayerLauncher.exe")
++        player_executable_path = self.roblox_player_launcher_path
+ 
+         product = RobloxProduct.app
+         self._write_flags(product, self.all_player_app_settings_paths)
+ 
+-        launch_args = ["-app"]
+         if self._configuration.roblox_release_channel != MAIN_ROBLOX_RELEASE_CHANNEL:
+-            launch_args = ["-channel", self._configuration.roblox_release_channel.value, *launch_args]
++            launch_args = ["-channel", self._configuration.roblox_release_channel.value]
+ 
+         self._core_control.run_exe(player_executable_path, *launch_args, accelerate_graphics=True)
+ 

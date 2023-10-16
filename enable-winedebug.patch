@@ -1,0 +1,13 @@
+diff --git a/src/grapejuice_common/models/wineprefix_configuration_model.py b/src/grapejuice_common/models/wineprefix_configuration_model.py
+index 1930902..b641d81 100644
+--- a/src/grapejuice_common/models/wineprefix_configuration_model.py
++++ b/src/grapejuice_common/models/wineprefix_configuration_model.py
+@@ -40,7 +40,7 @@ class WineprefixConfigurationModel(pydantic_v1.BaseModel):
+     disable_edge_update: bool = True
+     prime_offload_sink: int = -1
+     use_mesa_gl_override: bool = False
+-    enable_winedebug: bool = False
++    enable_winedebug: bool = True
+     winedebug_string: str = ""
+     roblox_release_channel: RobloxReleaseChannel = RobloxReleaseChannel.LIVE
+     roblox_renderer: str = RobloxRenderer.Undetermined.value

@@ -185,5 +185,11 @@ modules:
           version-query: .tag_name | sub("^v"; "")
           url-query: .assets.sources[] | select(.url | endswith("/grapejuice-v" +
             $version + ".tar.bz2")) | .url
+      - type: patch
+        path: enable-winedebug.patch
+      - type: patch
+        path: roblox-launch-fixes.patch
+      - type: patch
+        path: unblock-webview2.patch
       - type: file
         path: net.brinkervii.grapejuice.metainfo.xml

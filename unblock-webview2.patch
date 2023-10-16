@@ -1,0 +1,27 @@
+diff --git a/src/grapejuice_common/wine/wineprefix_core_control.py b/src/grapejuice_common/wine/wineprefix_core_control.py
+index c3afa98..aa63bc8 100644
+--- a/src/grapejuice_common/wine/wineprefix_core_control.py
++++ b/src/grapejuice_common/wine/wineprefix_core_control.py
+@@ -447,9 +447,6 @@ class WineprefixCoreControl:
+ 
+         os.remove(target_path)
+ 
+-    def block_microsoft_edge_webview2_installation(self):
+-        self._prefix_paths.program_files_x86_microsoft.mkdir(parents=True, mode=0x400, exist_ok=True)
+-
+     def unblock_microsoft_edge_webview2_installation(self):
+         path = self._prefix_paths.program_files_x86_microsoft
+ 
+diff --git a/src/grapejuice_common/wine/wineprefix_roblox.py b/src/grapejuice_common/wine/wineprefix_roblox.py
+index fade471..4ef84d9 100644
+--- a/src/grapejuice_common/wine/wineprefix_roblox.py
++++ b/src/grapejuice_common/wine/wineprefix_roblox.py
+@@ -62,7 +62,7 @@ class WineprefixRoblox:
+ 
+     def install_roblox(self, post_install_function: callable = None):
+         self._core_control.create_prefix()
+-        self._core_control.block_microsoft_edge_webview2_installation()
++        self._core_control.unblock_microsoft_edge_webview2_installation()
+ 
+         self._core_control.run_exe(
+             self.download_installer(),
