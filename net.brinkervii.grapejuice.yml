@@ -14,33 +14,10 @@ finish-args:
   #- --device=dri # Uncomment if --device=all is removed/commented to fix graphics issues
   - --allow=devel # Necessary for VMProtect to function.
   - --socket=pulseaudio
-  - --allow=multiarch
   - --device=all # Necessary for controller support (important on Steam Deck)
   - --env=GRAPEJUICE_LOCALE_DIRECTORY=/app/share/locale
   - --env=PATH=/app/bin:/usr/bin:/app/patched_wine/bin
   - --env=PYTHONPATH=/app/lib/python3/dist-packages
-
-add-extensions:
-  org.freedesktop.Platform.Compat.i386:
-    directory: lib/i386-linux-gnu
-    version: '23.08'
-
-  org.freedesktop.Platform.Compat.i386.Debug:
-    directory: lib/debug/lib/i386-linux-gnu
-    version: '23.08'
-    no-autodownload: true
-
-  org.freedesktop.Platform.GL32:
-    directory: lib/i386-linux-gnu/GL
-    version: '1.4'
-    versions: 23.08;1.4
-    subdirectories: true
-    no-autodownload: true
-    autodelete: false
-    add-ld-path: lib
-    merge-dirs: vulkan/icd.d;glvnd/egl_vendor.d;OpenCL/vendors;lib/dri;lib/d3d;vulkan/explicit_layer.d;vulkan/implicit_layer.d
-    download-if: active-gl-driver
-    enable-if: active-gl-driver
 
 cleanup:
   # pygobject headers
@@ -64,20 +41,6 @@ modules:
     cleanup:
       - /share/man
       - /bin/xkeystone
-
-  - name: bundle-setup
-    buildsystem: simple
-    build-commands:
-      - mkdir -p /app/lib/i386-linux-gnu
-      - mkdir -p /app/lib/debug/lib/i386-linux-gnu
-      - mkdir -p /app/lib/i386-linux-gnu/GL
-      - install -Dm644 ld.so.conf /app/etc/ld.so.conf
-    sources:
-      - type: inline
-        dest-filename: ld.so.conf
-        contents: |
-          /app/lib32
-          /app/lib/i386-linux-gnu
 
   - name: wine
     buildsystem: simple
