@@ -78,7 +78,7 @@ index fade471..1bf48b0 100644
              return True
  
          except RobloxExecutableNotFound:
-@@ -275,14 +275,13 @@ class WineprefixRoblox:
+@@ -275,14 +275,15 @@ class WineprefixRoblox:
          self._core_control.run_exe(player_launcher_path, uri, accelerate_graphics=True)
  
      def launch_app(self):
@@ -92,6 +92,8 @@ index fade471..1bf48b0 100644
          if self._configuration.roblox_release_channel != MAIN_ROBLOX_RELEASE_CHANNEL:
 -            launch_args = ["-channel", self._configuration.roblox_release_channel.value, *launch_args]
 +            launch_args = ["-channel", self._configuration.roblox_release_channel.value]
++        else:
++            launch_args = []
  
          self._core_control.run_exe(player_executable_path, *launch_args, accelerate_graphics=True)
  

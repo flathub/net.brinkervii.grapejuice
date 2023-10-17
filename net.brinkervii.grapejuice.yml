@@ -14,6 +14,7 @@ finish-args:
   #- --device=dri # Uncomment if --device=all is removed/commented to fix graphics issues
   - --allow=devel # Necessary for VMProtect to function.
   - --socket=pulseaudio
+  - --allow=multiarch # Wine still does a 32-bit syscall in WoW64 mode
   - --device=all # Necessary for controller support (important on Steam Deck)
   - --env=GRAPEJUICE_LOCALE_DIRECTORY=/app/share/locale
   - --env=PATH=/app/bin:/usr/bin:/app/patched_wine/bin
