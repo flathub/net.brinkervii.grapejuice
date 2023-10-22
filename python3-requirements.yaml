@@ -15,8 +15,8 @@ modules:
     sources:
       - &id001
         type: file
-        url: https://files.pythonhosted.org/packages/db/f1/45f288a45215e12dea5a107a2e686e33902701d5485219437b5d64d1080a/pycairo-1.25.0.tar.gz
-        sha256: 37842b9bfa6339c45a5025f752e1d78d5840b1a0f82303bdd5610846ad8b5c4f
+        url: https://files.pythonhosted.org/packages/c7/7c/de4d40316ee563e4f15a0f05f28c8458833fbef80c4588b9dd51f39b78ee/pycairo-1.25.1.tar.gz
+        sha256: 7e2be4fbc3b4536f16db7a11982cbf713e75069a4d73d44fe5a49b68423f5c0c
         x-checker-data:
           name: pycairo
           type: pypi
@@ -72,8 +72,8 @@ modules:
           packagetype: bdist_wheel
           type: pypi
       - type: file
-        url: https://files.pythonhosted.org/packages/cf/ac/e89b2f2f75f51e9859979b56d2ec162f7f893221975d244d8d5277aa9489/charset-normalizer-3.3.0.tar.gz
-        sha256: 63563193aec44bce707e0c5ca64ff69fa72ed7cf34ce6e11d5127555756fd2f6
+        url: https://files.pythonhosted.org/packages/6d/b3/aa417b4e3ace24067f243e45cceaffc12dba6b8bd50c229b43b3b163768b/charset-normalizer-3.3.1.tar.gz
+        sha256: d9137a876020661972ca6eec0766d81aef8a5627df628b664b234b73396e727e
         x-checker-data:
           name: charset-normalizer
           type: pypi
@@ -92,8 +92,8 @@ modules:
           packagetype: bdist_wheel
           type: pypi
       - type: file
-        url: https://files.pythonhosted.org/packages/26/40/9957270221b6d3e9a3b92fdfba80dd5c9661ff45a664b47edd5d00f707f5/urllib3-2.0.6-py3-none-any.whl
-        sha256: 7a7c7003b000adf9e7ca2a377c9688bbc54ed41b985789ed576570342a375cd2
+        url: https://files.pythonhosted.org/packages/d2/b2/b157855192a68541a91ba7b2bbcb91f1b4faa51f8bae38d8005c034be524/urllib3-2.0.7-py3-none-any.whl
+        sha256: fdb6d215c776278489906c2f8916e6e7d4f5a9b602ccbcfdf7f016fc8da0596e
         x-checker-data:
           name: urllib3
           packagetype: bdist_wheel
