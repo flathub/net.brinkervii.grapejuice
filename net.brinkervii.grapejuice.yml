@@ -136,8 +136,8 @@ modules:
     sources:
       - type: archive
         archive-type: tar-gzip
-        url: https://api.github.com/repos/Winetricks/winetricks/tarball/20230212
-        sha256: 01d81eaa9ba2d900df8eb7a2928688aa280a950d3f55e45528ccf319bd26f3ec
+        url: https://api.github.com/repos/Winetricks/winetricks/tarball/20240105
+        sha256: 6517c0249b9d9e67b0d75e99e7a85c74540246702ab73df1f5b883b4094a0963
         x-checker-data:
           type: json
           url: https://api.github.com/repos/Winetricks/winetricks/releases/latest
