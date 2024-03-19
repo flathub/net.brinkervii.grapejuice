@@ -18,13 +18,9 @@
 	<developer_name>The Grapejuice Developers</developer_name>
 	<screenshots>
 		<screenshot type="default">
-			<caption>The main window of Grapejuice</caption>
-			<image type="source" width="1009" height="619">https://media.discordapp.net/attachments/563966858462625822/996349189023866930/unknown.png</image>
-		</screenshot>
-		<screenshot>
-			<caption>A demonstration of Grapejuice</caption>
-			<video container="webm" codec="vp9" width="1920" height="1080">https://cdn.discordapp.com/attachments/1004888837878722621/1033943850579918910/grapejuice-flatpak-demo.webm</video>
-		</screenshot>
+	    		<image type="source" width="1116" height="606">https://vinegarhq.github.io/image.png</image>
+			<caption>Vinegar gameplay of Phantom Forces, an experience on Roblox</caption>
+	  	</screenshot>
 	</screenshots>
 	<releases>
 		<release version="7.20.12" date="2023-10-16">
