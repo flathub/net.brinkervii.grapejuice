@@ -14,6 +14,12 @@
 	</categories>
 	<url type="homepage">https://gitlab.com/brinkervii/grapejuice</url>
 	<url type="bugtracker">https://github.com/flathub/net.brinkervii.grapejuice/issues</url>
+	<screenshots>
+	  <screenshot type="default">
+	    <image type="source" width="1116" height="606">https://vinegarhq.github.io/image.png</image>
+			<caption>Vinegar gameplay of Phantom Forces, an experience on Roblox</caption>
+	  </screenshot>
+	</screenshots>
 	<project_license>GPL-3.0-only</project_license>
 	<developer_name>The Grapejuice Developers</developer_name>
 	<screenshots>
